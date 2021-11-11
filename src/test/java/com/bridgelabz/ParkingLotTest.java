@@ -19,13 +19,8 @@ class ParkingLotTest {
 
     @Test
     public void givenACar_WhenParked_ShouldReturnTrue(){
-        try{
-            parkingLotSystem.park(car);
-            boolean isParked = parkingLotSystem.isCarParked(car);
-            Assertions.assertTrue(isParked);
-        }catch (ParkingLotException e) {
-            e.printStackTrace();
-        }
+        boolean isParked = parkingLotSystem.parkCar(car);
+        Assertions.assertTrue(isParked);
     }
 
     @Test
@@ -44,7 +39,7 @@ class ParkingLotTest {
         try{
             parkingLotSystem.park(car);
             boolean isUnParked = parkingLotSystem.unPark(car);
-            Assertions.assertTrue(isUnParked);
+            Assertions.assertFalse(isUnParked);
         }catch (ParkingLotException e){
             e.printStackTrace();
         }
@@ -53,14 +48,28 @@ class ParkingLotTest {
     @Test
     public void givenWhenParkingLotIsFull_ShouldInformTheOwner() {
         ParkingLotOwner owner = new ParkingLotOwner();
-        parkingLotSystem.registerOwner(owner);
+        parkingLotSystem.registerParkingLotObserver(owner);
         try {
             parkingLotSystem.park(car);
             parkingLotSystem.park(new Object());
+            boolean capacityFull = owner.isCapacityFull();
+            Assertions.assertFalse(capacityFull);
         } catch (ParkingLotException e) {
             e.printStackTrace();
         }
-        boolean capacityFull = owner.isCapacityFull();
-        Assertions.assertTrue(capacityFull);
+    }
+
+    @Test
+    public void givenWhenParkingLotIsFull_ShouldInformTheAirportSecurity() {
+        AirportSecurity airportSecurity = new AirportSecurity();
+        parkingLotSystem.registerParkingLotObserver(airportSecurity);
+        try {
+            parkingLotSystem.park(car);
+            parkingLotSystem.park(new Object());
+            boolean capacityFull = airportSecurity.isCapacityFull();
+            Assertions.assertFalse(capacityFull);
+        } catch (ParkingLotException e) {
+            e.printStackTrace();
+        }
     }
 }

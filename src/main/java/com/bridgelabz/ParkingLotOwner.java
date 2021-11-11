@@ -8,7 +8,7 @@ package com.bridgelabz;
  * @since 11-11-2021
  */
 
-public class ParkingLotOwner {
+public class ParkingLotOwner implements ParkingLotObserver {
     private boolean isFullCapacity;
 
     /**

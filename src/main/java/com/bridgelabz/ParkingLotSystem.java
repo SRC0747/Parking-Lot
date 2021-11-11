@@ -1,5 +1,7 @@
 package com.bridgelabz;
 
+import java.util.ArrayList;
+
 /**
  * Check whether the driver can park the car in the ParkingLot
  *
@@ -9,17 +11,19 @@ package com.bridgelabz;
  */
 
 public class ParkingLotSystem {
-    private int currentCapacity;
-    private final int actualCapacity;
+    private  ArrayList<ParkingLotObserver> observers;
+    private ArrayList<Object> cars;
+    private int actualCapacity;
     private Object car;
-    private ParkingLotOwner owner;
 
     /**
-     * Constructor to initialize the actualCapacity and currentCapacity of ParkingLot to a particular value and zero accordingly
-     * @param capacity initialize the actualCapacity of ParkingLot
+     * Constructor to access multiple observers and cars to access the capacity of ParkingLot and initialize the actualCapacity of ParkingLot to a particular value.
+     * @param capacity defines the actualCapacity of ParkingLot
      */
     public ParkingLotSystem(int capacity){
-        this.currentCapacity = 0;
+        this.observers = new ArrayList<>();
+        this.cars = new ArrayList<>();
+        //this.currentCapacity = 0;
         this.actualCapacity = capacity;
     }
 
@@ -28,16 +32,18 @@ public class ParkingLotSystem {
      * @param car to park in the ParkingLot
      * @throws ParkingLotException exception message if ParkingLot is full
      */
-    public void park(Object car) throws  ParkingLotException{
+    public void park(Object car) throws  ParkingLotException {
        // return true;
-        if (this.currentCapacity == this.actualCapacity) {
-            owner.capacityIsFull();
+        if (this.cars.size() == this.actualCapacity) {
+            for (ParkingLotObserver observer : observers){
+                observer.capacityIsFull();
+            }
             throw new ParkingLotException("ParkingLot is full.");
         }
-        this.currentCapacity++;
-        this.car = car;
     }
-
+    public boolean parkCar(Object car) {
+        return true;
+    }
     /**
      * unPark method to unPark the Parked car from the ParkingLot
      * @param car to check whether the car is already parked and also unPark the car
@@ -46,8 +52,9 @@ public class ParkingLotSystem {
     public boolean unPark(Object car) {
         if (car == null)
             return false;
-        if (this.car.equals(car)){
-            this.car = null;
+        if (this.cars.contains(car)){
+            //this.vehicle = null;
+            this.cars.remove(car);
             return true;
         }
         return false;
@@ -65,10 +72,19 @@ public class ParkingLotSystem {
     }
 
     /**
-     * registerOwner method informs the owner whether ParkingLot capacity is full
-     * @param owner indicates the ParkingLot owner
+     * registerOwner method informs the observer whether ParkingLot capacity is full
+     * @param observer indicates the ParkingLot observer including both the owner and security
      */
-    public void registerOwner(ParkingLotOwner owner) {
-        this.owner = owner;
+    public void registerParkingLotObserver(ParkingLotObserver observer) {
+       // this.owner = owner;
+        this.observers.add(observer);
     }
+
+    public void setCapacity(int capacity) {
+        this.actualCapacity = capacity;
+    }
+
+    /*public void registerSecurity(AirportSecurity airportSecurity) {
+        this.security = airportSecurity;
+    }*/
 }
