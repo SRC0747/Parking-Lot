@@ -14,7 +14,7 @@ class ParkingLotTest {
     @BeforeEach
     public void setUp() throws Exception {
         car = new Object();
-        parkingLotSystem = new ParkingLotSystem();
+        parkingLotSystem = new ParkingLotSystem(1);
     }
 
     @Test
@@ -55,7 +55,7 @@ class ParkingLotTest {
         ParkingLotOwner owner = new ParkingLotOwner();
         parkingLotSystem.registerOwner(owner);
         try {
-            parkingLotSystem.park(vehicle);
+            parkingLotSystem.park(car);
             parkingLotSystem.park(new Object());
         } catch (ParkingLotException e) {
             e.printStackTrace();
