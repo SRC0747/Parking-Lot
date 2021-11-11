@@ -41,6 +41,12 @@ public class ParkingLotSystem {
             throw new ParkingLotException("ParkingLot is full.");
         }
     }
+
+    /**
+     * parkCar checks whether a car can be parked in the ParkingLot
+     * @param car indicates the car has to be parked
+     * @return true if the car can be parked
+     */
     public boolean parkCar(Object car) {
         return true;
     }
@@ -80,6 +86,10 @@ public class ParkingLotSystem {
         this.observers.add(observer);
     }
 
+    /**
+     * setCapacity sets the given actualCapacity of ParkingLot over which cars cannot be parked
+     * @param capacity indicates the actualCapacity of ParkingLot
+     */
     public void setCapacity(int capacity) {
         this.actualCapacity = capacity;
     }
