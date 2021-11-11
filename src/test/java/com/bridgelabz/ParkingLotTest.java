@@ -1,16 +1,41 @@
 package com.bridgelabz;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ParkingLotTest {
 
+    ParkingLotSystem parkingLotSystem = null;
+    Object car = null;
+
+    @BeforeEach
+    public void setUp() throws Exception {
+        car = new Object();
+        parkingLotSystem = new ParkingLotSystem();
+    }
+
     @Test
-    public void givenACar_WhenParked_ShouldReturnTrue() {
-        ParkingLotSystem parkingLotSystem = new ParkingLotSystem();
-        boolean isParked = parkingLotSystem.park(new Object());
-        Assertions.assertTrue(isParked);
+    public void givenACar_WhenParked_ShouldReturnTrue(){
+        try{
+            parkingLotSystem.park(car);
+            boolean isParked = parkingLotSystem.isVehicleParked(car);
+            Assertions.assertTrue(isParked);
+        }catch (ParkingLotException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void givenACar_WhenAlreadyParked_ShouldReturnFalse() {
+        try{
+            parkingLotSystem.park(car);
+            parkingLotSystem.park(new Object());
+        }catch (ParkingLotException e){
+            Assertions.assertEquals("ParkingLot is full.", e.getMessage());
+            e.printStackTrace();
+        }
     }
 }
