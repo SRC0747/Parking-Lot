@@ -38,4 +38,15 @@ class ParkingLotTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void givenACar_WhenUnParked_ShouldReturnTrue() {
+        try{
+            parkingLotSystem.park(car);
+            boolean isUnParked = parkingLotSystem.unPark(car);
+            Assertions.assertTrue(isUnParked);
+        }catch (ParkingLotException e){
+            e.printStackTrace();
+        }
+    }
 }
