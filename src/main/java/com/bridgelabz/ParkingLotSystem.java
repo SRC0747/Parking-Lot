@@ -14,6 +14,10 @@ public class ParkingLotSystem {
     private Object car;
     private ParkingLotOwner owner;
 
+    /**
+     * Constructor to initialize the actualCapacity and currentCapacity of ParkingLot to a particular value and zero accordingly
+     * @param capacity initialize the actualCapacity of ParkingLot
+     */
     public ParkingLotSystem(int capacity){
         this.currentCapacity = 0;
         this.actualCapacity = capacity;
@@ -60,6 +64,10 @@ public class ParkingLotSystem {
         return false;
     }
 
+    /**
+     * registerOwner method informs the owner whether ParkingLot capacity is full
+     * @param owner indicates the ParkingLot owner
+     */
     public void registerOwner(ParkingLotOwner owner) {
         this.owner = owner;
     }

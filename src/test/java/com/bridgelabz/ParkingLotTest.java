@@ -60,7 +60,7 @@ class ParkingLotTest {
         } catch (ParkingLotException e) {
             e.printStackTrace();
         }
-        boolean capacityFull = owner.IsCapacityFull();
+        boolean capacityFull = owner.isCapacityFull();
         Assertions.assertTrue(capacityFull);
     }
 }

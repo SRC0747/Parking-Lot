@@ -1,13 +1,28 @@
 package com.bridgelabz;
 
+/**
+ * Show sign to ParkingLot owner informing that ParkingLot is full
+ *
+ * @author Sampriti Roy Chowdhury
+ * @version 0.0.1
+ * @since 11-11-2021
+ */
+
 public class ParkingLotOwner {
     private boolean isFullCapacity;
 
+    /**
+     * capacityIsFull initialize the capacity of ParkingLot through which it indicates that ParkingLot is full
+     */
     public void capacityIsFull() {
         isFullCapacity = true;
     }
 
-    public boolean IsCapacityFull() {
+    /**
+     * isCapacityFull method is used to check the full capacity of ParkingLot
+     * @return true that ParkingLot is full
+     */
+    public boolean isCapacityFull() {
         return this.isFullCapacity;
     }
 }
