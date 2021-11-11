@@ -49,4 +49,18 @@ class ParkingLotTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void givenWhenParkingLotIsFull_ShouldInformTheOwner() {
+        ParkingLotOwner owner = new ParkingLotOwner();
+        parkingLotSystem.registerOwner(owner);
+        try {
+            parkingLotSystem.park(vehicle);
+            parkingLotSystem.park(new Object());
+        } catch (ParkingLotException e) {
+            e.printStackTrace();
+        }
+        boolean capacityFull = owner.IsCapacityFull();
+        Assertions.assertTrue(capacityFull);
+    }
 }
