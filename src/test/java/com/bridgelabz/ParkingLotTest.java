@@ -21,7 +21,7 @@ class ParkingLotTest {
     public void givenACar_WhenParked_ShouldReturnTrue(){
         try{
             parkingLotSystem.park(car);
-            boolean isParked = parkingLotSystem.isVehicleParked(car);
+            boolean isParked = parkingLotSystem.isCarParked(car);
             Assertions.assertTrue(isParked);
         }catch (ParkingLotException e) {
             e.printStackTrace();

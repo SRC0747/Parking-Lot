@@ -7,6 +7,7 @@ package com.bridgelabz;
  * @version 0.0.1
  * @since 11-11-2021
  */
+
 public class ParkingLotSystem {
     private Object car;
 
@@ -14,9 +15,9 @@ public class ParkingLotSystem {
     }
 
     /**
-     * park method to check whether to park the car in the ParkingLot
-     * @param car to check the car can be parked or not
-     * @return true if the car can be parked
+     * park method to check whether the ParkingLot is empty or  not and park the car if empty
+     * @param car to park in the ParkingLot
+     * @throws ParkingLotException exception message if ParkingLot is full
      */
     public void park(Object car) throws  ParkingLotException{
        // return true;
@@ -25,8 +26,13 @@ public class ParkingLotSystem {
         this.car = car;
     }
 
-    public boolean unPark(Object vehicle) {
-        if (vehicle == null)
+    /**
+     * unPark method to unPark the Parked car from the ParkingLot
+     * @param car to check whether the car is already parked and also unPark the car
+     * @return true if car can be unParked otherwise false
+     */
+    public boolean unPark(Object car) {
+        if (car == null)
             return false;
         if (this.car.equals(car)){
             this.car = null;
@@ -35,7 +41,12 @@ public class ParkingLotSystem {
         return false;
     }
 
-    public boolean isVehicleParked(Object car) {
+    /**
+     * isCarParked method check whether the car is already parked or not in the ParkingLot
+     * @param car is already parked in ParkingLot
+     * @return true if car is already parked otherwise false
+     */
+    public boolean isCarParked(Object car) {
         if (this.car.equals(car))
             return true;
         return false;
