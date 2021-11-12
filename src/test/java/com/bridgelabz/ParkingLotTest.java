@@ -17,7 +17,7 @@ class ParkingLotTest {
     }
 
     @Test
-    public void givenAVehicle_WhenParked_ShouldReturnTrue() {
+    public void givenACar_WhenParked_ShouldReturnTrue() {
         try {
             parkingLotSystem.park(car);
             boolean isParked = parkingLotSystem.isCarParked(car);
@@ -28,7 +28,7 @@ class ParkingLotTest {
     }
 
     @Test
-    public void givenAVehicle_WhenAlreadyParked_ShouldThrowException() {
+    public void givenACar_WhenAlreadyParked_ShouldThrowException() {
         try {
             parkingLotSystem.park(car);
             parkingLotSystem.park(car);
@@ -38,7 +38,7 @@ class ParkingLotTest {
     }
 
     @Test
-    public void givenAVehicle_WhenUnParked_ShouldReturnTrue() {
+    public void givenACar_WhenUnParked_ShouldReturnTrue() {
         try {
             parkingLotSystem.park(car);
             parkingLotSystem.unPark(new Object());
@@ -50,7 +50,7 @@ class ParkingLotTest {
     }
 
     @Test
-    public void givenAVehicle_WhenParkingLotIsFull_ShouldInformTheOwner() {
+    public void givenACar_WhenParkingLotIsFull_ShouldInformTheOwner() {
         ParkingLotOwner owner = new ParkingLotOwner();
         parkingLotSystem.registerParkingLotObserver(owner);
         try {
@@ -64,7 +64,7 @@ class ParkingLotTest {
     }
 
     @Test
-    public void givenAVehicle_WhenParkingLotIsFull_ShouldInformTheAirportSecurity() {
+    public void givenACar_WhenParkingLotIsFull_ShouldInformTheAirportSecurity() {
         AirportSecurity airportSecurity = new AirportSecurity();
         parkingLotSystem.registerParkingLotObserver(airportSecurity);
         try {
@@ -75,5 +75,21 @@ class ParkingLotTest {
         }
             boolean capacityFull = airportSecurity.isCapacityFull();
             Assertions.assertTrue(capacityFull);
+    }
+
+    @Test
+    public void givenACar_WhenParkingLotAvailable_ShouldInformTheOwner() {
+        ParkingLotOwner owner = new ParkingLotOwner();
+
+        try {
+            parkingLotSystem.registerParkingLotObserver(owner);
+            parkingLotSystem.park(car);
+            parkingLotSystem.park(new Object());
+            parkingLotSystem.unPark(car);
+            Assertions.assertFalse(owner.isCapacityFull());
+        } catch (ParkingLotException e) {
+            Assertions.assertEquals("ParkingLot is full.", e.getMessage());
+        }
+        Assertions.assertTrue(owner.isCapacityFull());
     }
 }
