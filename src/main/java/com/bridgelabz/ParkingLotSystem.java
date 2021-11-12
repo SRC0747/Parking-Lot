@@ -11,10 +11,11 @@ import java.util.ArrayList;
  */
 
 public class ParkingLotSystem {
+    private int currentCapacity;
     private  ArrayList<ParkingLotObserver> observers;
-    private ArrayList<Object> cars;
+    private ArrayList<Object> car;
     private int actualCapacity;
-    private Object car;
+    //private Object car;
 
     /**
      * Constructor to access multiple observers and cars to access the capacity of ParkingLot and initialize the actualCapacity of ParkingLot to a particular value.
@@ -22,79 +23,77 @@ public class ParkingLotSystem {
      */
     public ParkingLotSystem(int capacity){
         this.observers = new ArrayList<>();
-        this.cars = new ArrayList<>();
-        //this.currentCapacity = 0;
+        this.car = new ArrayList<>();
+        this.currentCapacity = 0;
         this.actualCapacity = capacity;
     }
 
     /**
-     * park method to check whether the ParkingLot is empty or  not and park the car if empty
-     * @param car to park in the ParkingLot
-     * @throws ParkingLotException exception message if ParkingLot is full
+     * Purpose : This method created to Park given car in Parking Lot
+     *
+     * @param car given car as parameter to observe the capacity of ParkingLot
+     * @throws ParkingLotException : when the parking lot is full
      */
     public void park(Object car) throws  ParkingLotException {
-       // return true;
-        if (this.cars.size() == this.actualCapacity) {
-            for (ParkingLotObserver observer : observers){
+        if (this.currentCapacity == this.actualCapacity) {
+            for (ParkingLotObserver observer : observers)
                 observer.capacityIsFull();
-            }
             throw new ParkingLotException("ParkingLot is full.");
         }
+        this.currentCapacity++;
+        this.car.add(car);
     }
 
     /**
-     * parkCar checks whether a car can be parked in the ParkingLot
-     * @param car indicates the car has to be parked
-     * @return true if the car can be parked
+     * Purpose : This method created to UnParked the car from parking lot
+     *
+     * @param car given vehicle as parameter to unPark the car
+     * @throws ParkingLotException : when there is no vehicle to un park
      */
-    public boolean parkCar(Object car) {
-        return true;
-    }
-    /**
-     * unPark method to unPark the Parked car from the ParkingLot
-     * @param car to check whether the car is already parked and also unPark the car
-     * @return true if car can be unParked otherwise false
-     */
-    public boolean unPark(Object car) {
-        if (car == null)
-            return false;
-        if (this.cars.contains(car)){
-            //this.vehicle = null;
-            this.cars.remove(car);
+    public boolean unPark(Object car) throws ParkingLotException {
+        if (this.car.contains(car)) {
+            this.car.remove(car);
             return true;
         }
-        return false;
+        throw new ParkingLotException("No Such Vehicle Found");
     }
 
     /**
-     * isCarParked method check whether the car is already parked or not in the ParkingLot
-     * @param car is already parked in ParkingLot
-     * @return true if car is already parked otherwise false
+     * Purpose : To Check car is Parked in the ParkingLot
+     *
+     * @param car given Vehicle as parameter
+     * @return car Equal to Given car
      */
     public boolean isCarParked(Object car) {
-        if (this.car.equals(car))
-            return true;
-        return false;
+        return this.car.contains(car);
     }
 
     /**
-     * registerOwner method informs the observer whether ParkingLot capacity is full
-     * @param observer indicates the ParkingLot observer including both the owner and security
+     * Purpose : To Check whether the car is UnParked
+     *
+     * @param car given Vehicle as parameter
+     * @return The Vehicle is UnParked
+     */
+    public boolean isCarUnParked(Object car) {
+        return this.car == null;
+    }
+
+    /**
+     * Purpose : Register Observer as Like Owner and AirportSecurity In List to be informed about ParkingLot
+     *
+     * @param observer To Add the observers in the List
      */
     public void registerParkingLotObserver(ParkingLotObserver observer) {
-       // this.owner = owner;
         this.observers.add(observer);
     }
 
     /**
-     * setCapacity sets the given actualCapacity of ParkingLot over which cars cannot be parked
-     * @param capacity indicates the actualCapacity of ParkingLot
+     * Purpose : Set the actualCapacity of the ParkingLot
+     *
+     * @param capacity defines the actual capacity
      */
     public void setCapacity(int capacity) {
         this.actualCapacity = capacity;
     }
 
-    /*public void registerSecurity(AirportSecurity airportSecurity) {
-        this.security = airportSecurity;
-    }*/
 }

@@ -7,69 +7,73 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ParkingLotTest {
-
     ParkingLotSystem parkingLotSystem = null;
     Object car = null;
 
     @BeforeEach
-    public void setUp() throws Exception {
-        car = new Object();
+    void setUp() {
         parkingLotSystem = new ParkingLotSystem(1);
+        car = new Object();
     }
 
     @Test
-    public void givenACar_WhenParked_ShouldReturnTrue(){
-        boolean isParked = parkingLotSystem.parkCar(car);
-        Assertions.assertTrue(isParked);
-    }
-
-    @Test
-    public void givenACar_WhenAlreadyParked_ShouldReturnFalse() {
-        try{
+    public void givenAVehicle_WhenParked_ShouldReturnTrue() {
+        try {
             parkingLotSystem.park(car);
-            parkingLotSystem.park(new Object());
-        }catch (ParkingLotException e){
+            boolean isParked = parkingLotSystem.isCarParked(car);
+            Assertions.assertTrue(isParked);
+        } catch (ParkingLotException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void givenAVehicle_WhenAlreadyParked_ShouldThrowException() {
+        try {
+            parkingLotSystem.park(car);
+            parkingLotSystem.park(car);
+        } catch (ParkingLotException e) {
             Assertions.assertEquals("ParkingLot is full.", e.getMessage());
-            e.printStackTrace();
         }
     }
 
     @Test
-    public void givenACar_WhenUnParked_ShouldReturnTrue() {
-        try{
+    public void givenAVehicle_WhenUnParked_ShouldReturnTrue() {
+        try {
             parkingLotSystem.park(car);
-            boolean isUnParked = parkingLotSystem.unPark(car);
-            Assertions.assertFalse(isUnParked);
-        }catch (ParkingLotException e){
+            parkingLotSystem.unPark(new Object());
+            boolean isUnParked = parkingLotSystem.isCarUnParked(car);
+            Assertions.assertTrue(isUnParked);
+        } catch (ParkingLotException e) {
             e.printStackTrace();
         }
     }
 
     @Test
-    public void givenWhenParkingLotIsFull_ShouldInformTheOwner() {
+    public void givenAVehicle_WhenParkingLotIsFull_ShouldInformTheOwner() {
         ParkingLotOwner owner = new ParkingLotOwner();
         parkingLotSystem.registerParkingLotObserver(owner);
         try {
             parkingLotSystem.park(car);
             parkingLotSystem.park(new Object());
-            boolean capacityFull = owner.isCapacityFull();
-            Assertions.assertFalse(capacityFull);
         } catch (ParkingLotException e) {
             e.printStackTrace();
         }
+        boolean capacityFull = owner.isCapacityFull();
+        Assertions.assertTrue(capacityFull);
     }
 
     @Test
-    public void givenWhenParkingLotIsFull_ShouldInformTheAirportSecurity() {
+    public void givenAVehicle_WhenParkingLotIsFull_ShouldInformTheAirportSecurity() {
         AirportSecurity airportSecurity = new AirportSecurity();
         parkingLotSystem.registerParkingLotObserver(airportSecurity);
         try {
             parkingLotSystem.park(car);
             parkingLotSystem.park(new Object());
-            boolean capacityFull = airportSecurity.isCapacityFull();
-            Assertions.assertFalse(capacityFull);
         } catch (ParkingLotException e) {
             e.printStackTrace();
         }
+            boolean capacityFull = airportSecurity.isCapacityFull();
+            Assertions.assertTrue(capacityFull);
     }
 }
