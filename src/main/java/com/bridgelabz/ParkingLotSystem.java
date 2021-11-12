@@ -15,6 +15,7 @@ public class ParkingLotSystem {
     private  ArrayList<ParkingLotObserver> observers;
     private ArrayList<Object> car;
     private int actualCapacity;
+    private ArrayList<Object> slots;
     //private Object car;
 
     /**
@@ -96,4 +97,13 @@ public class ParkingLotSystem {
         this.actualCapacity = capacity;
     }
 
+    public void getAvailableSlot(Object slot) throws ParkingLotException{
+        if (this.slots.contains(actualCapacity)) {
+            for (ParkingLotObserver observer : observers){
+                observer.capacityIsFull();
+            }
+            throw new ParkingLotException("No slot is remaining");
+        }
+        this.slots.add(slot);
+    }
 }

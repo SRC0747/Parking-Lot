@@ -92,4 +92,21 @@ class ParkingLotTest {
         }
         Assertions.assertTrue(owner.isCapacityFull());
     }
+
+    @Test
+    public void givenParkingAttendantAvailableSlot_WhereToParkTheCars() {
+        Object slot = new Object();
+        ParkingLotOwner owner = new ParkingLotOwner();
+        try {
+            parkingLotSystem.registerParkingLotObserver(owner);
+            parkingLotSystem.park(car);
+            parkingLotSystem.park(new Object());
+            parkingLotSystem.unPark(car);
+            parkingLotSystem.getAvailableSlot(slot);
+            //Assertions.assertFalse(owner.isCapacityFull());
+        } catch (ParkingLotException e) {
+            e.printStackTrace();
+        }
+        Assertions.assertTrue(owner.isCapacityFull());
+    }
 }
