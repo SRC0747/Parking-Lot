@@ -5,10 +5,10 @@ package com.bridgelabz;
  *
  * @author Sampriti Roy Chowdhury
  * @version 0.0.1
- * @since 11-11-2021
+ * @since 14-11-2021
  */
 
-public class ParkingLotException extends Exception {
+public class ParkingLotException extends RuntimeException {
     /**
      * ParkingLotException method throws the exception message of ParkingLot is full
      * @param message ParkingLot is full

@@ -18,95 +18,68 @@ class ParkingLotTest {
 
     @Test
     public void givenACar_WhenParked_ShouldReturnTrue() {
-        try {
-            parkingLotSystem.park(car);
-            boolean isParked = parkingLotSystem.isCarParked(car);
-            Assertions.assertTrue(isParked);
-        } catch (ParkingLotException e) {
-            e.printStackTrace();
-        }
+        parkingLotSystem.park(car);
+        boolean isParked = parkingLotSystem.isCarParked(car);
+        Assertions.assertTrue(isParked);
     }
 
     @Test
     public void givenACar_WhenAlreadyParked_ShouldThrowException() {
-        try {
-            parkingLotSystem.park(car);
-            parkingLotSystem.park(car);
-        } catch (ParkingLotException e) {
-            Assertions.assertEquals("ParkingLot is full.", e.getMessage());
-        }
+        Assertions.assertThrows(ParkingLotException.class, () -> {
+           parkingLotSystem.park(car);
+           parkingLotSystem.park(car);
+        }, "Parking lot is full.");
     }
 
     @Test
     public void givenACar_WhenUnParked_ShouldReturnTrue() {
-        try {
-            parkingLotSystem.park(car);
-            parkingLotSystem.unPark(new Object());
-            boolean isUnParked = parkingLotSystem.isCarUnParked(car);
-            Assertions.assertTrue(isUnParked);
-        } catch (ParkingLotException e) {
-            e.printStackTrace();
-        }
+        Assertions.assertThrows(ParkingLotException.class, () -> {
+            parkingLotSystem.unPark(car);
+        }, "No Such Vehicle Found");
     }
 
     @Test
     public void givenACar_WhenParkingLotIsFull_ShouldInformTheOwner() {
-        ParkingLotOwner owner = new ParkingLotOwner();
-        parkingLotSystem.registerParkingLotObserver(owner);
-        try {
-            parkingLotSystem.park(car);
-            parkingLotSystem.park(new Object());
-        } catch (ParkingLotException e) {
-            e.printStackTrace();
-        }
-        boolean capacityFull = owner.isCapacityFull();
-        Assertions.assertTrue(capacityFull);
+        ParkingLotOwner parkingLotOwner = new ParkingLotOwner();
+        parkingLotSystem.registerParkingLotObserver(parkingLotOwner);
+        Assertions.assertThrows(ParkingLotException.class, () -> {
+           parkingLotSystem.park(car);
+           parkingLotSystem.park(new Object());
+        }, "Parking lot is full.");
     }
 
     @Test
     public void givenACar_WhenParkingLotIsFull_ShouldInformTheAirportSecurity() {
         AirportSecurity airportSecurity = new AirportSecurity();
         parkingLotSystem.registerParkingLotObserver(airportSecurity);
-        try {
+        Assertions.assertThrows(ParkingLotException.class, () -> {
             parkingLotSystem.park(car);
             parkingLotSystem.park(new Object());
-        } catch (ParkingLotException e) {
-            e.printStackTrace();
-        }
-            boolean capacityFull = airportSecurity.isCapacityFull();
-            Assertions.assertTrue(capacityFull);
+        }, "Parking lot is full.");
     }
 
     @Test
-    public void givenACar_WhenParkingLotAvailable_ShouldInformTheOwner() {
+    public void givenACar_WhenParkingLotIsAvailable_ShouldInformTheOwner() {
         ParkingLotOwner owner = new ParkingLotOwner();
-
-        try {
-            parkingLotSystem.registerParkingLotObserver(owner);
+        parkingLotSystem.registerParkingLotObserver(owner);
+        Assertions.assertThrows(ParkingLotException.class, () -> {
             parkingLotSystem.park(car);
             parkingLotSystem.park(new Object());
             parkingLotSystem.unPark(car);
-            Assertions.assertFalse(owner.isCapacityFull());
-        } catch (ParkingLotException e) {
-            Assertions.assertEquals("ParkingLot is full.", e.getMessage());
-        }
-        Assertions.assertTrue(owner.isCapacityFull());
+        }, "Parking lot is full.");
     }
 
     @Test
-    public void givenParkingAttendantAvailableSlot_WhereToParkTheCars() {
+    public void givenParkingAttendant_AvailableSlot_WhereToParkCar() {
         Object slot = new Object();
         ParkingLotOwner owner = new ParkingLotOwner();
-        try {
-            parkingLotSystem.registerParkingLotObserver(owner);
+        parkingLotSystem.registerParkingLotObserver(owner);
+        //parkingLotSystem.getAvailableSlot(slot);
+        Assertions.assertThrows(ParkingLotException.class, () -> {
             parkingLotSystem.park(car);
             parkingLotSystem.park(new Object());
             parkingLotSystem.unPark(car);
             parkingLotSystem.getAvailableSlot(slot);
-            //Assertions.assertFalse(owner.isCapacityFull());
-        } catch (ParkingLotException e) {
-            e.printStackTrace();
-        }
-        Assertions.assertTrue(owner.isCapacityFull());
+        }, "No slot is remaining");
     }
 }

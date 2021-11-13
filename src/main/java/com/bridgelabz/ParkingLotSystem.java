@@ -7,7 +7,7 @@ import java.util.ArrayList;
  *
  * @author Sampriti Roy Chowdhury
  * @version 0.0.1
- * @since 11-11-2021
+ * @since 14-11-2021
  */
 
 public class ParkingLotSystem {
@@ -40,6 +40,9 @@ public class ParkingLotSystem {
             for (ParkingLotObserver observer : observers)
                 observer.capacityIsFull();
             throw new ParkingLotException("ParkingLot is full.");
+        }
+        if (this.car.contains(car)){
+            throw new ParkingLotException("Vehicle Already exist.");
         }
         this.currentCapacity++;
         this.car.add(car);
@@ -96,6 +99,14 @@ public class ParkingLotSystem {
     public void setCapacity(int capacity) {
         this.actualCapacity = capacity;
     }
+
+
+    /**
+     * Purpose : This method created to check for available slot for parking car in Parking Lot
+     *
+     * @param slot check whether slot is available in ParkingLot
+     * @throws ParkingLotException : when No slot will be remaining
+     */
 
     public void getAvailableSlot(Object slot) throws ParkingLotException{
         if (this.slots.contains(actualCapacity)) {
