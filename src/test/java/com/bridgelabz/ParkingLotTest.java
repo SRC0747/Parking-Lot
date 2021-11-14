@@ -35,7 +35,7 @@ class ParkingLotTest {
     public void givenACar_WhenUnParked_ShouldReturnTrue() {
         Assertions.assertThrows(ParkingLotException.class, () -> {
             parkingLotSystem.unPark(car);
-        }, "No Such Vehicle Found");
+        }, "No Such car Found");
     }
 
     @Test
@@ -74,7 +74,6 @@ class ParkingLotTest {
         Object slot = new Object();
         ParkingLotOwner owner = new ParkingLotOwner();
         parkingLotSystem.registerParkingLotObserver(owner);
-        //parkingLotSystem.getAvailableSlot(slot);
         Assertions.assertThrows(ParkingLotException.class, () -> {
             parkingLotSystem.park(car);
             parkingLotSystem.park(new Object());
@@ -89,6 +88,6 @@ class ParkingLotTest {
             parkingLotSystem.park(car);
             parkingLotSystem.unPark(car);
             parkingLotSystem.findCar(car);
-        }, "Not find the vehicle to go home.");
+        }, "Not find the car to go home.");
     }
 }

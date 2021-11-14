@@ -13,10 +13,9 @@ import java.util.ArrayList;
 public class ParkingLotSystem {
     private int currentCapacity;
     private  ArrayList<ParkingLotObserver> observers;
-    private ArrayList<Object> car;
+    private ArrayList<Object> cars;
     private int actualCapacity;
     private ArrayList<Object> slots;
-    //private Object car;
 
     /**
      * Constructor to access multiple observers and cars to access the capacity of ParkingLot and initialize the actualCapacity of ParkingLot to a particular value.
@@ -24,7 +23,7 @@ public class ParkingLotSystem {
      */
     public ParkingLotSystem(int capacity){
         this.observers = new ArrayList<>();
-        this.car = new ArrayList<>();
+        this.cars = new ArrayList<>();
         this.currentCapacity = 0;
         this.actualCapacity = capacity;
     }
@@ -41,45 +40,45 @@ public class ParkingLotSystem {
                 observer.capacityIsFull();
             throw new ParkingLotException("ParkingLot is full.");
         }
-        if (this.car.contains(car)){
+        if (this.cars.contains(car)){
             throw new ParkingLotException("Vehicle Already exist.");
         }
         this.currentCapacity++;
-        this.car.add(car);
+        this.cars.add(car);
     }
 
     /**
      * Purpose : This method created to UnParked the car from parking lot
      *
      * @param car given vehicle as parameter to unPark the car
-     * @throws ParkingLotException : when there is no vehicle to un park
+     * @throws ParkingLotException : when there is no car to un park
      */
     public boolean unPark(Object car) throws ParkingLotException {
-        if (this.car.contains(car)) {
-            this.car.remove(car);
+        if (this.cars.contains(car)) {
+            this.cars.remove(car);
             return true;
         }
-        throw new ParkingLotException("No Such Vehicle Found");
+        throw new ParkingLotException("No Such car Found");
     }
 
     /**
      * Purpose : To Check car is Parked in the ParkingLot
      *
-     * @param car given Vehicle as parameter
-     * @return car Equal to Given car
+     * @param car given car as parameter
+     * @return the equal car if matched to Given car
      */
     public boolean isCarParked(Object car) {
-        return this.car.contains(car);
+        return this.cars.contains(car);
     }
 
     /**
      * Purpose : To Check whether the car is UnParked
      *
-     * @param car given Vehicle as parameter
-     * @return The Vehicle is UnParked
+     * @param car given car as parameter
+     * @return The car is UnParked
      */
     public boolean isCarUnParked(Object car) {
-        return this.car == null;
+        return this.cars == null;
     }
 
     /**
@@ -118,11 +117,17 @@ public class ParkingLotSystem {
         this.slots.add(slot);
     }
 
+    /**
+     * Purpose : This method created to find the car whether it is parked in the parking lot
+     *
+     * @param car given car as parameter to find the car
+     * @throws ParkingLotException : when no car is found there
+     */
     public boolean findCar(Object car) throws ParkingLotException {
-        if (this.car.contains(car)) {
-            this.car.remove(car);
+        if (this.cars.contains(car)) {
+            this.cars.remove(car);
             return true;
         }
-        throw new ParkingLotException("Not find the vehicle to go home.");
+        throw new ParkingLotException("Not find the car to go home.");
     }
 }
