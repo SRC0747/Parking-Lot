@@ -117,4 +117,12 @@ public class ParkingLotSystem {
         }
         this.slots.add(slot);
     }
+
+    public boolean findCar(Object car) throws ParkingLotException {
+        if (this.car.contains(car)) {
+            this.car.remove(car);
+            return true;
+        }
+        throw new ParkingLotException("Not find the vehicle to go home.");
+    }
 }

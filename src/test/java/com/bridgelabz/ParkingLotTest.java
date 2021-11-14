@@ -82,4 +82,13 @@ class ParkingLotTest {
             parkingLotSystem.getAvailableSlot(slot);
         }, "No slot is remaining");
     }
+
+    @Test
+    public void givenACar_WhenFound_DriverCanGoHome() {
+        Assertions.assertThrows(ParkingLotException.class, () -> {
+            parkingLotSystem.park(car);
+            parkingLotSystem.unPark(car);
+            parkingLotSystem.findCar(car);
+        }, "Not find the vehicle to go home.");
+    }
 }

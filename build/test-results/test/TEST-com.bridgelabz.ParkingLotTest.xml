@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.bridgelabz.ParkingLotTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-11-13T21:54:24" hostname="DESKTOP-U9VT6NQ" time="0.061">
+<testsuite name="com.bridgelabz.ParkingLotTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-11-14T07:01:38" hostname="DESKTOP-U9VT6NQ" time="0.037">
   <properties/>
-  <testcase name="givenParkingAttendant_AvailableSlot_WhereToParkCar()" classname="com.bridgelabz.ParkingLotTest" time="0.061"/>
+  <testcase name="givenACar_WhenFound_DriverCanGoHome()" classname="com.bridgelabz.ParkingLotTest" time="0.037"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
