@@ -1,7 +1,7 @@
 package com.bridgelabz;
 
 /**
- * Show sign to Airport Security of ParkingLot  informing that ParkingLot is full
+ * Purpose : Show sign to Airport Security of ParkingLot  informing that ParkingLot is full
  *
  * @author Sampriti Roy Chowdhury
  * @version 0.0.1
@@ -21,8 +21,9 @@ public class AirportSecurity implements ParkingLotObserver {
         }
 
     /**
-     * isCapacityFull method is used to check the full capacity of ParkingLot
-     * @return true that ParkingLot is full
+     * Purpose : This method is used to check the full capacity of ParkingLot
+     *
+     * @return the actualCapacity of ParkingLot
      */
     @Override
         public boolean isCapacityFull() {

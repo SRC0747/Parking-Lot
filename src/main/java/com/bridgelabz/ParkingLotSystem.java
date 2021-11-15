@@ -3,7 +3,7 @@ package com.bridgelabz;
 import java.util.ArrayList;
 
 /**
- * Check whether the driver can park the car in the ParkingLot
+ * Purpose : Check whether the driver can park the car in the ParkingLot
  *
  * @author Sampriti Roy Chowdhury
  * @version 0.0.1
@@ -137,7 +137,12 @@ public class ParkingLotSystem {
         throw new ParkingLotException("Not find the vehicle to go home.");
     }
 
-
+    /**
+     * Purpose: This method is used to Find the Time when Vehicle Parked
+     *
+     * @param vehicle is passed as parameter
+     * @return parking time of the vehicle
+     */
     public String getVehicleParkingTime(Vehicle vehicle) {
         if (isCarParked(vehicle)) {
             return vehicle.getParkingTime();

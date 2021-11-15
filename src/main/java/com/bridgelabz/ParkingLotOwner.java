@@ -1,7 +1,7 @@
 package com.bridgelabz;
 
 /**
- * Show sign to ParkingLot owner informing that ParkingLot is full
+ * Purpose : Show sign to ParkingLot owner informing that ParkingLot is full
  *
  * @author Sampriti Roy Chowdhury
  * @version 0.0.1
@@ -20,8 +20,9 @@ public class ParkingLotOwner implements ParkingLotObserver {
     }
 
     /**
-     * isCapacityFull method is used to check the full capacity of ParkingLot
-     * @return true that ParkingLot is full
+     * Purpose : This method is used to check the full capacity of ParkingLot
+     *
+     * @return the actualCapacity of ParkingLo
      */
     @Override
     public boolean isCapacityFull() {

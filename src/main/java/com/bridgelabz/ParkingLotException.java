@@ -1,7 +1,7 @@
 package com.bridgelabz;
 
 /**
- * Throws an Exception message whether it is found that ParkingLot is full
+ * Purpose : To Simulate an Exception whether it is occurred in ParkingLot
  *
  * @author Sampriti Roy Chowdhury
  * @version 0.0.1
@@ -10,8 +10,9 @@ package com.bridgelabz;
 
 public class ParkingLotException extends RuntimeException {
     /**
-     * ParkingLotException method throws the exception message of ParkingLot is full
-     * @param message ParkingLot is full
+     * Purpose : This method throws the exception message of ParkingLot is full
+     *
+     * @param message defines the exception message whether occurred
      */
     public ParkingLotException(String message) {
         super(message);
