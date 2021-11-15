@@ -4,11 +4,14 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ParkingLotTest {
     ParkingLotSystem parkingLotSystem = null;
     Object car = null;
+    private List<Integer> listOfEmptyParkingSlots;
 
     @BeforeEach
     void setUp() {
@@ -18,7 +21,7 @@ class ParkingLotTest {
 
     @Test
     public void givenACar_WhenParked_ShouldReturnTrue() {
-        parkingLotSystem.park(car);
+        parkingLotSystem.park(car,0);
         boolean isParked = parkingLotSystem.isCarParked(car);
         Assertions.assertTrue(isParked);
     }
@@ -26,9 +29,9 @@ class ParkingLotTest {
     @Test
     public void givenACar_WhenAlreadyParked_ShouldThrowException() {
         Assertions.assertThrows(ParkingLotException.class, () -> {
-           parkingLotSystem.park(car);
-           parkingLotSystem.park(car);
-        }, "Parking lot is full.");
+           parkingLotSystem.park(car, 0);
+           parkingLotSystem.park(car, 1);
+        }, "ParkingLot is full.");
     }
 
     @Test
@@ -43,9 +46,9 @@ class ParkingLotTest {
         ParkingLotOwner parkingLotOwner = new ParkingLotOwner();
         parkingLotSystem.registerParkingLotObserver(parkingLotOwner);
         Assertions.assertThrows(ParkingLotException.class, () -> {
-           parkingLotSystem.park(car);
-           parkingLotSystem.park(new Object());
-        }, "Parking lot is full.");
+           parkingLotSystem.park(car, 0);
+            parkingLotSystem.park(car, 1);
+        }, "ParkingLot is full.");
     }
 
     @Test
@@ -53,9 +56,9 @@ class ParkingLotTest {
         AirportSecurity airportSecurity = new AirportSecurity();
         parkingLotSystem.registerParkingLotObserver(airportSecurity);
         Assertions.assertThrows(ParkingLotException.class, () -> {
-            parkingLotSystem.park(car);
-            parkingLotSystem.park(new Object());
-        }, "Parking lot is full.");
+            parkingLotSystem.park(car, 0);
+            parkingLotSystem.park(car, 1);
+        }, "ParkingLot is full.");
     }
 
     @Test
@@ -63,29 +66,26 @@ class ParkingLotTest {
         ParkingLotOwner owner = new ParkingLotOwner();
         parkingLotSystem.registerParkingLotObserver(owner);
         Assertions.assertThrows(ParkingLotException.class, () -> {
-            parkingLotSystem.park(car);
-            parkingLotSystem.park(new Object());
+            parkingLotSystem.park(car, 0);
+            parkingLotSystem.park(car, 1);
+            parkingLotSystem.park(new Object(), 2);
             parkingLotSystem.unPark(car);
-        }, "Parking lot is full.");
+        }, "ParkingLot is full.");
     }
 
     @Test
     public void givenParkingAttendant_AvailableSlot_WhereToParkCar() {
-        Object slot = new Object();
-        ParkingLotOwner owner = new ParkingLotOwner();
-        parkingLotSystem.registerParkingLotObserver(owner);
-        Assertions.assertThrows(ParkingLotException.class, () -> {
-            parkingLotSystem.park(car);
-            parkingLotSystem.park(new Object());
-            parkingLotSystem.unPark(car);
-            parkingLotSystem.getAvailableSlot(slot);
-        }, "No slot is remaining");
-    }
+        listOfEmptyParkingSlots = parkingLotSystem.getAvailableListOfSlots();
+        parkingLotSystem.park(car,0);
+        listOfEmptyParkingSlots = parkingLotSystem.getAvailableListOfSlots();
+        Assertions.assertEquals(0, listOfEmptyParkingSlots.size());
+     }
+
 
     @Test
     public void givenACar_WhenFound_DriverCanGoHome() {
         Assertions.assertThrows(ParkingLotException.class, () -> {
-            parkingLotSystem.park(car);
+            parkingLotSystem.park(car, 0);
             parkingLotSystem.unPark(car);
             parkingLotSystem.findCar(car);
         }, "Not find the car to go home.");

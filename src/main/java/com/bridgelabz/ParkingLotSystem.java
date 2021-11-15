@@ -12,39 +12,50 @@ import java.util.ArrayList;
 
 public class ParkingLotSystem {
     private int currentCapacity;
-    private  ArrayList<ParkingLotObserver> observers;
+    private ArrayList<ParkingLotObserver> observers;
     private ArrayList<Object> cars;
     private int actualCapacity;
     private ArrayList<Object> slots;
 
     /**
      * Constructor to access multiple observers and cars to access the capacity of ParkingLot and initialize the actualCapacity of ParkingLot to a particular value.
+     *
      * @param capacity defines the actualCapacity of ParkingLot
      */
-    public ParkingLotSystem(int capacity){
+    public ParkingLotSystem(int capacity) {
         this.observers = new ArrayList<>();
-        this.cars = new ArrayList<>();
+        //this.cars = new ArrayList<>();
         this.currentCapacity = 0;
         this.actualCapacity = capacity;
+        initializeParkingLot();
+    }
+
+    public void initializeParkingLot() {
+        this.cars = new ArrayList();
+        for (int i = 0; i < this.actualCapacity; i++) {
+            cars.add(i, null);
+        }
     }
 
     /**
      * Purpose : This method created to Park given car in Parking Lot
      *
      * @param car given car as parameter to observe the capacity of ParkingLot
+     * @param slot given slot as to check the available slots in ParkingLot
      * @throws ParkingLotException : when the parking lot is full
      */
-    public void park(Object car) throws  ParkingLotException {
+    public void park(Object car, Integer slot) throws ParkingLotException {
         if (this.currentCapacity == this.actualCapacity) {
             for (ParkingLotObserver observer : observers)
                 observer.capacityIsFull();
             throw new ParkingLotException("ParkingLot is full.");
         }
-        if (this.cars.contains(car)){
+        if (this.cars.contains(car)) {
             throw new ParkingLotException("Vehicle Already exist.");
         }
-        this.currentCapacity++;
-        this.cars.add(car);
+        //this.currentCapacity++;
+        //this.cars.add(car);
+        this.cars.set(slot, car);
     }
 
     /**
@@ -99,22 +110,19 @@ public class ParkingLotSystem {
         this.actualCapacity = capacity;
     }
 
-
     /**
-     * Purpose : This method created to check for available slot for parking car in Parking Lot
+     * Purpose : This method is used to get and access the available slot to park car
      *
-     * @param slot check whether slot is available in ParkingLot
-     * @throws ParkingLotException : when No slot will be remaining
+     * @return availableSlot whether it is available
      */
-
-    public void getAvailableSlot(Object slot) throws ParkingLotException{
-        if (this.slots.contains(actualCapacity)) {
-            for (ParkingLotObserver observer : observers){
-                observer.capacityIsFull();
+    public ArrayList<Integer> getAvailableListOfSlots() {
+        ArrayList<Integer> availableSlots = new ArrayList<>();
+        for (int i = 0; i < actualCapacity; i++) {
+            if (this.cars.get(i) == null) {
+                availableSlots.add(i);
             }
-            throw new ParkingLotException("No slot is remaining");
         }
-        this.slots.add(slot);
+        return availableSlots;
     }
 
     /**
@@ -123,10 +131,9 @@ public class ParkingLotSystem {
      * @param car given car as parameter to find the car
      * @throws ParkingLotException : when no car is found there
      */
-    public boolean findCar(Object car) throws ParkingLotException {
+    public int findCar(Object car) throws ParkingLotException {
         if (this.cars.contains(car)) {
-            this.cars.remove(car);
-            return true;
+            return this.cars.indexOf(car);
         }
         throw new ParkingLotException("Not find the car to go home.");
     }
