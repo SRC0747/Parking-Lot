@@ -99,4 +99,12 @@ class ParkingLotTest {
         int slotNumber = parkingLotSystem.findCar(car);
         Assertions.assertEquals(0, slotNumber);
     }
+
+    @Test
+    public void givenAVehicle_WhenParked_ThenCheckTimeOfParking_ShouldReturnParkingTime() {
+        car = new Vehicle("Audi", "OR-05AB4321", "09:00");
+        parkingLotSystem.park(car, 0);
+        String vehicleParkingTime = parkingLotSystem.getVehicleParkingTime((Vehicle) car);
+        Assertions.assertEquals("09:00", vehicleParkingTime);
+    }
 }
