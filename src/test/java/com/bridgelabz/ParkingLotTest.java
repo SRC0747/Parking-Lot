@@ -87,7 +87,7 @@ class ParkingLotTest {
         Assertions.assertThrows(ParkingLotException.class, () -> {
             parkingLotSystem.park(vehicle, 0);
             parkingLotSystem.unPark(vehicle);
-            parkingLotSystem.findCar(vehicle);
+            parkingLotSystem.findVehicle(vehicle);
         }, "Not find the vehicle to go home.");
     }
 
@@ -96,7 +96,7 @@ class ParkingLotTest {
         listOfEmptyParkingSlots = parkingLotSystem.getAvailableListOfSlots();
         vehicle = new Vehicle("Audi", "OR-05AB4321", "09:00");
         parkingLotSystem.park(vehicle, 0);
-        int slotNumber = parkingLotSystem.findCar(vehicle);
+        int slotNumber = parkingLotSystem.findVehicle(vehicle);
         Assertions.assertEquals(0, slotNumber);
     }
 

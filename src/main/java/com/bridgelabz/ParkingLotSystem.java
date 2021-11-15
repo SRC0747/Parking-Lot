@@ -130,7 +130,7 @@ public class ParkingLotSystem {
      * @param vehicle given car as parameter to find the car
      * @throws ParkingLotException : when no car is found there
      */
-    public int findCar(Object vehicle) throws ParkingLotException {
+    public int findVehicle(Object vehicle) throws ParkingLotException {
         if (this.vehicles.contains(vehicle)) {
             return this.vehicles.indexOf(vehicle);
         }
