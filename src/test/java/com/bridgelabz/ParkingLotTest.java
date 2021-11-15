@@ -90,4 +90,13 @@ class ParkingLotTest {
             parkingLotSystem.findCar(car);
         }, "Not find the car to go home.");
     }
+
+    @Test
+    public void givenParkingLotSystem_WhenCheckedForVehicle_ShouldReturnVehicleSlot() {
+        listOfEmptyParkingSlots = parkingLotSystem.getAvailableListOfSlots();
+        car = new Vehicle("Audi", "OR-05AB4321", "09:00");
+        parkingLotSystem.park(car, 0);
+        int slotNumber = parkingLotSystem.findCar(car);
+        Assertions.assertEquals(0, slotNumber);
+    }
 }

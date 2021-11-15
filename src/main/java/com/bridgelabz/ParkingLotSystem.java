@@ -18,13 +18,12 @@ public class ParkingLotSystem {
     private ArrayList<Object> slots;
 
     /**
-     * Constructor to access multiple observers and cars to access the capacity of ParkingLot and initialize the actualCapacity of ParkingLot to a particular value.
+     * Constructor to access multiple observers and vehicles to access the capacity of ParkingLot and initialize the actualCapacity of ParkingLot to a particular value.
      *
      * @param capacity defines the actualCapacity of ParkingLot
      */
     public ParkingLotSystem(int capacity) {
         this.observers = new ArrayList<>();
-        //this.cars = new ArrayList<>();
         this.currentCapacity = 0;
         this.actualCapacity = capacity;
         initializeParkingLot();
@@ -38,9 +37,9 @@ public class ParkingLotSystem {
     }
 
     /**
-     * Purpose : This method created to Park given car in Parking Lot
+     * Purpose : This method created to Park given vehicle in Parking Lot
      *
-     * @param car given car as parameter to observe the capacity of ParkingLot
+     * @param car given vehicle as parameter to observe the capacity of ParkingLot
      * @param slot given slot as to check the available slots in ParkingLot
      * @throws ParkingLotException : when the parking lot is full
      */
@@ -136,5 +135,17 @@ public class ParkingLotSystem {
             return this.cars.indexOf(car);
         }
         throw new ParkingLotException("Not find the car to go home.");
+    }
+
+    /**
+     * Purpose: To Find the Time when Vehicle Parked
+     * @param vehicle is passed as parameter
+     * @return parking time of the vehicle
+     */
+    public String getVehicleParkingTime(Vehicle vehicle) {
+        if (isCarParked(vehicle)) {
+            return vehicle.getParkingTime();
+        }
+        return null;
     }
 }
