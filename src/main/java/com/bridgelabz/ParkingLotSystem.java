@@ -3,7 +3,7 @@ package com.bridgelabz;
 import java.util.ArrayList;
 
 /**
- * Purpose : Check whether the driver can park the car in the ParkingLot
+ * Purpose : Simulate the ParkingLot System
  *
  * @author Sampriti Roy Chowdhury
  * @version 0.0.1
@@ -29,6 +29,9 @@ public class ParkingLotSystem {
         initializeParkingLot();
     }
 
+    /**
+     * Purpose : Initialize the list of Vehicles with null values
+     */
     public void initializeParkingLot() {
         this.vehicles = new ArrayList();
         for (int i = 0; i < this.actualCapacity; i++) {
@@ -40,17 +43,19 @@ public class ParkingLotSystem {
      * Purpose : This method created to Park given vehicle in Parking Lot
      *
      * @param vehicle given vehicle as parameter to observe the capacity of ParkingLot
-     * @param slot given slot as to check the available slots in ParkingLot
+     * @param slot    given slot as to check the available slots in ParkingLot
      * @throws ParkingLotException : when the parking lot is full
      */
     public void park(Object vehicle, Integer slot) throws ParkingLotException {
         if (this.currentCapacity == this.actualCapacity) {
             for (ParkingLotObserver observer : observers)
                 observer.capacityIsFull();
-            throw new ParkingLotException("ParkingLot is full.");
+            throw new ParkingLotException(ParkingLotException.ExceptionType.PARKING_LOT_IS_FULL,
+                    "ParkingLot is full.");
         }
         if (this.vehicles.contains(vehicle)) {
-            throw new ParkingLotException("Vehicle Already exist.");
+            throw new ParkingLotException(ParkingLotException.ExceptionType.VEHICLE_ALREADY_EXIST,
+                    "Vehicle Already exist.");
         }
         //this.currentCapacity++;
         //this.cars.add(car);
@@ -68,7 +73,8 @@ public class ParkingLotSystem {
             this.vehicles.remove(vehicle);
             return true;
         }
-        throw new ParkingLotException("No Such vehicle Found");
+        throw new ParkingLotException(ParkingLotException.ExceptionType.NO_SUCH_VEHICLE,
+                "No Such vehicle Found");
     }
 
     /**
@@ -77,18 +83,8 @@ public class ParkingLotSystem {
      * @param vehicle given car as parameter
      * @return the equal car if matched to Given car
      */
-    public boolean isCarParked(Object vehicle) {
+    public boolean isVehicleParked(Object vehicle) {
         return this.vehicles.contains(vehicle);
-    }
-
-    /**
-     * Purpose : To Check whether the car is UnParked
-     *
-     * @param vehicle given car as parameter
-     * @return The car is UnParked
-     */
-    public boolean isCarUnParked(Object vehicle) {
-        return this.vehicles == null;
     }
 
     /**
@@ -134,7 +130,8 @@ public class ParkingLotSystem {
         if (this.vehicles.contains(vehicle)) {
             return this.vehicles.indexOf(vehicle);
         }
-        throw new ParkingLotException("Not find the vehicle to go home.");
+        throw new ParkingLotException(ParkingLotException.ExceptionType.VEHICLE_IS_NOT_AVAILABLE,
+                "Not find the vehicle to go home.");
     }
 
     /**
@@ -144,7 +141,7 @@ public class ParkingLotSystem {
      * @return parking time of the vehicle
      */
     public String getVehicleParkingTime(Vehicle vehicle) {
-        if (isCarParked(vehicle)) {
+        if (isVehicleParked(vehicle)) {
             return vehicle.getParkingTime();
         }
         return null;

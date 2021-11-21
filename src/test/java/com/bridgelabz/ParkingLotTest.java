@@ -22,7 +22,7 @@ class ParkingLotTest {
     @Test
     public void givenAVehicle_WhenParked_ShouldReturnTrue() {
         parkingLotSystem.park(vehicle,0);
-        boolean isParked = parkingLotSystem.isCarParked(vehicle);
+        boolean isParked = parkingLotSystem.isVehicleParked(vehicle);
         Assertions.assertTrue(isParked);
     }
 
@@ -94,7 +94,7 @@ class ParkingLotTest {
     @Test
     public void givenParkingLotSystem_WhenCheckedForVehicle_ShouldReturnVehicleSlot() {
         listOfEmptyParkingSlots = parkingLotSystem.getAvailableListOfSlots();
-        vehicle = new Vehicle("Audi", "OR-05AB4321", "09:00");
+        vehicle = new Vehicle("Maruti", "OR-05AB4321", "10:00");
         parkingLotSystem.park(vehicle, 0);
         int slotNumber = parkingLotSystem.findVehicle(vehicle);
         Assertions.assertEquals(0, slotNumber);
@@ -102,9 +102,9 @@ class ParkingLotTest {
 
     @Test
     public void givenAVehicle_WhenParked_ThenCheckTimeOfParking_ShouldReturnParkingTime() {
-        vehicle = new Vehicle("Audi", "OR-05AB4321", "09:00");
+        vehicle = new Vehicle("Maruti", "OR-05AB4321", "10:00");
         parkingLotSystem.park(vehicle, 0);
         String vehicleParkingTime = parkingLotSystem.getVehicleParkingTime((Vehicle) vehicle);
-        Assertions.assertEquals("09:00", vehicleParkingTime);
+        Assertions.assertEquals("10:00", vehicleParkingTime);
     }
 }
