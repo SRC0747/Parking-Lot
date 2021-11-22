@@ -181,4 +181,15 @@ public class ParkingLotSystem {
         throw new ParkingLotException(ParkingLotException.ExceptionType.NO_SUCH_VEHICLE,
                 "No such vehicle found");
     }
+
+    public int getBMWVehiclePosition(Vehicle vehicle) throws ParkingLotException{
+        if (isVehicleParked(vehicle)
+                && vehicle.getName().equals("BMW"))
+            for (Vehicle position : vehicles) {
+                if (position.equals(vehicle))
+                    return vehicles.indexOf(position);
+            }
+        throw new ParkingLotException(ParkingLotException.ExceptionType.NO_SUCH_VEHICLE,
+                "No such vehicle found");
+    }
 }
