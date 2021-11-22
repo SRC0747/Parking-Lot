@@ -11,6 +11,7 @@ public class Vehicle {
     private final String name;
     private final String vehicleNumber;
     private final String parkingTime;
+    private final String vehicleColour;
 
     /**
      * Constructor to access Vehicle name, Vehicle number and parkingTime of a Vehicle to a particular value
@@ -19,10 +20,11 @@ public class Vehicle {
      * @param vehicleNumber define the particular number of the given vehicle
      * @param parkingTime define the time when the vehicle is going to be parked
      */
-    public Vehicle(String name, String vehicleNumber, String parkingTime) {
+    public Vehicle(String name, String vehicleNumber, String parkingTime, String vehicleColour) {
         this.name = name;
         this.vehicleNumber = vehicleNumber;
         this.parkingTime = parkingTime;
+        this.vehicleColour = vehicleColour;
     }
 
     /**
@@ -50,5 +52,8 @@ public class Vehicle {
      */
     public String getParkingTime() {
         return parkingTime;
+    }
+    public String getVehicleColour(){
+        return vehicleColour;
     }
 }

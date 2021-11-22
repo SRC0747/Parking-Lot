@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.bridgelabz.ParkingLotTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2021-11-21T16:33:07" hostname="DESKTOP-U9VT6NQ" time="0.391">
+<testsuite name="com.bridgelabz.ParkingLotTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-11-22T07:17:53" hostname="DESKTOP-U9VT6NQ" time="0.121">
   <properties/>
-  <testcase name="givenAVehicle_WhenParkingLotIsAvailable_ShouldInformTheOwner()" classname="com.bridgelabz.ParkingLotTest" time="0.124"/>
-  <testcase name="givenAVehicle_WhenFound_DriverCanGoHome()" classname="com.bridgelabz.ParkingLotTest" time="0.005"/>
-  <testcase name="givenAVehicle_WhenParked_ShouldReturnTrue()" classname="com.bridgelabz.ParkingLotTest" time="0.058"/>
-  <testcase name="givenAVehicle_WhenParkingLotIsFull_ShouldInformTheAirportSecurity()" classname="com.bridgelabz.ParkingLotTest" time="0.016"/>
-  <testcase name="givenParkingAttendant_AvailableSlot_WhereToParkVehicle()" classname="com.bridgelabz.ParkingLotTest" time="0.015"/>
-  <testcase name="givenAVehicle_WhenParkingLotIsFull_ShouldInformTheOwner()" classname="com.bridgelabz.ParkingLotTest" time="0.04"/>
-  <testcase name="givenAVehicle_WhenUnParked_ShouldReturnTrue()" classname="com.bridgelabz.ParkingLotTest" time="0.017"/>
-  <testcase name="givenAVehicle_WhenAlreadyParked_ShouldThrowException()" classname="com.bridgelabz.ParkingLotTest" time="0.003"/>
-  <testcase name="givenParkingLotSystem_WhenCheckedForVehicle_ShouldReturnVehicleSlot()" classname="com.bridgelabz.ParkingLotTest" time="0.034"/>
-  <testcase name="givenAVehicle_WhenParked_ThenCheckTimeOfParking_ShouldReturnParkingTime()" classname="com.bridgelabz.ParkingLotTest" time="0.01"/>
+  <testcase name="givenVehicle_WhenSearchedForWhiteColorVehicle_ShouldReturnTheVehicleLocation()" classname="com.bridgelabz.ParkingLotTest" time="0.121"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

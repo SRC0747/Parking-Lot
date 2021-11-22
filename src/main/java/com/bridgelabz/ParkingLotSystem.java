@@ -13,9 +13,10 @@ import java.util.ArrayList;
 public class ParkingLotSystem {
     private int currentCapacity;
     private ArrayList<ParkingLotObserver> observers;
-    private ArrayList<Object> vehicles;
+    private ArrayList<Vehicle> vehicles;
     private int actualCapacity;
     private ArrayList<Object> slots;
+    //private ArrayList<Vehicle> vehicles1 = new ArrayList<>();
 
     /**
      * Constructor to access multiple observers and vehicles to access the capacity of ParkingLot and initialize the actualCapacity of ParkingLot to a particular value.
@@ -46,19 +47,17 @@ public class ParkingLotSystem {
      * @param slot    given slot as to check the available slots in ParkingLot
      * @throws ParkingLotException : when the parking lot is full
      */
-    public void park(Object vehicle, Integer slot) throws ParkingLotException {
-        if (this.currentCapacity == this.actualCapacity) {
-            for (ParkingLotObserver observer : observers)
-                observer.capacityIsFull();
+    public void park(Vehicle vehicle, Integer slot) throws ParkingLotException {
+        if (this.vehicles.size() == actualCapacity && !this.vehicles.contains(null)) {
+            for (ParkingLotObserver parkingLotSystemObserver : observers)
+                parkingLotSystemObserver.capacityIsFull();
             throw new ParkingLotException(ParkingLotException.ExceptionType.PARKING_LOT_IS_FULL,
-                    "ParkingLot is full.");
+                    "Parking Lot is Full");
         }
         if (this.vehicles.contains(vehicle)) {
             throw new ParkingLotException(ParkingLotException.ExceptionType.VEHICLE_ALREADY_EXIST,
-                    "Vehicle Already exist.");
+                    "Vehicle already exist");
         }
-        //this.currentCapacity++;
-        //this.cars.add(car);
         this.vehicles.set(slot, vehicle);
     }
 
@@ -85,6 +84,10 @@ public class ParkingLotSystem {
      */
     public boolean isVehicleParked(Object vehicle) {
         return this.vehicles.contains(vehicle);
+    }
+
+    public boolean isVehicleUnParked(Vehicle vehicle) {
+        return !this.vehicles.contains(vehicle);
     }
 
     /**
@@ -145,5 +148,13 @@ public class ParkingLotSystem {
             return vehicle.getParkingTime();
         }
         return null;
+    }
+
+    public int getPositionOfWhiteColorVehicle(Vehicle vehicle) throws ParkingLotException{
+        if (isVehicleParked(vehicle) && vehicle.getVehicleColour().equals("White"))
+            for (Vehicle position : vehicles)
+                if (position.equals(vehicle)) return vehicles.indexOf(position);
+        throw new ParkingLotException(ParkingLotException.ExceptionType.NO_SUCH_VEHICLE,
+                "No white color vehicle found");
     }
 }
