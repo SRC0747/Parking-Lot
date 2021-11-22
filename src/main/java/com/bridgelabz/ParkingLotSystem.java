@@ -1,6 +1,8 @@
 package com.bridgelabz;
 
 import java.util.ArrayList;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 /**
  * Purpose : Simulate the ParkingLot System
@@ -16,7 +18,6 @@ public class ParkingLotSystem {
     private ArrayList<Vehicle> vehicles;
     private int actualCapacity;
     private ArrayList<Object> slots;
-    //private ArrayList<Vehicle> vehicles1 = new ArrayList<>();
 
     /**
      * Constructor to access multiple observers and vehicles to access the capacity of ParkingLot and initialize the actualCapacity of ParkingLot to a particular value.
@@ -191,5 +192,14 @@ public class ParkingLotSystem {
             }
         throw new ParkingLotException(ParkingLotException.ExceptionType.NO_SUCH_VEHICLE,
                 "No such vehicle found");
+    }
+
+    public boolean validateVehicleNumberPlate(String vehicleNumber) {
+        Pattern pattern = Pattern.compile("^[A-Z]{2}[ -][0-9]{2}[A-Z]{2}[0-9]{4}$");
+        Matcher matcher = pattern.matcher(vehicleNumber);
+        boolean number = matcher.matches();
+        if (vehicleNumber.isEmpty())
+            return false;
+        return number;
     }
 }
