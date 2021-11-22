@@ -125,4 +125,18 @@ public class ParkingLotTest {
                 () -> parkingLotSystem.getPositionOfWhiteColorVehicle(vehicle2));
         Assertions.assertEquals(0, positionOfVehicle1);
     }
+
+    @Test
+    public void givenVehicle_WhenSearchedForBlueToyotaVehicle_ShouldReturnTheVehiclePosition() {
+        Vehicle vehicle1 = new Vehicle("Audi", "OR-05AB4321", "09:00", "White");
+        Vehicle vehicle2 = new Vehicle("Toyota", "OR-05AA8909", "07:00", "Blue");
+        parkingLotSystem.park(vehicle1, 0);
+        parkingLotSystem.park(vehicle2, 1);
+        Assertions.assertThrows(ParkingLotException.class,
+                () -> parkingLotSystem.getNumberPlateOfBlueColorVehicle(vehicle1));
+        int positionOfVehicle2 = parkingLotSystem.getPositionOfBlueColorVehicle(vehicle2);
+        Assertions.assertEquals(1, positionOfVehicle2);
+    }
+
+
 }

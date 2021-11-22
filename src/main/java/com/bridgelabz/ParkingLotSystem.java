@@ -157,4 +157,28 @@ public class ParkingLotSystem {
         throw new ParkingLotException(ParkingLotException.ExceptionType.NO_SUCH_VEHICLE,
                 "No white color vehicle found");
     }
+
+    public String getNumberPlateOfBlueColorVehicle(Vehicle vehicle) throws ParkingLotException{
+        if (isVehicleParked(vehicle)
+                && vehicle.getVehicleColour().equals("Blue")
+                && vehicle.getName().equals("Toyota"))
+            for (Vehicle numberPlate : vehicles) {
+                if (numberPlate.equals(vehicle))
+                    return numberPlate.getVehicleNumber();
+            }
+        throw new ParkingLotException(ParkingLotException.ExceptionType.NO_SUCH_VEHICLE,
+                "No such vehicle found");
+    }
+
+    public int getPositionOfBlueColorVehicle(Vehicle vehicle) throws ParkingLotException{
+        if (isVehicleParked(vehicle)
+                && vehicle.getVehicleColour().equals("Blue")
+                && vehicle.getName().equals("Toyota"))
+            for (Vehicle position : vehicles) {
+                if (position.equals(vehicle))
+                    return vehicles.indexOf(position);
+            }
+        throw new ParkingLotException(ParkingLotException.ExceptionType.NO_SUCH_VEHICLE,
+                "No such vehicle found");
+    }
 }

@@ -53,7 +53,9 @@ public class Vehicle {
     public String getParkingTime() {
         return parkingTime;
     }
+
     public String getVehicleColour(){
         return vehicleColour;
     }
+
 }
