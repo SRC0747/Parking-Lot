@@ -87,6 +87,12 @@ public class ParkingLotSystem {
         return this.vehicles.contains(vehicle);
     }
 
+    /**
+     * Purpose : To Check a Vehicle is UnParked Or Not
+     *
+     * @param vehicle given Vehicle as parameter
+     * @return The Vehicle is UnParked
+     */
     public boolean isVehicleUnParked(Vehicle vehicle) {
         return !this.vehicles.contains(vehicle);
     }
@@ -151,6 +157,13 @@ public class ParkingLotSystem {
         return null;
     }
 
+    /**
+     * Purpose: To Find the position of the white color Vehicle Parked
+     *
+     * @param vehicle is passed as parameter to find the position
+     * @return the position of the white color vehicle
+     * @throws ParkingLotException : when there is no vehicle found
+     */
     public int getPositionOfWhiteColorVehicle(Vehicle vehicle) throws ParkingLotException{
         if (isVehicleParked(vehicle) && vehicle.getVehicleColour().equals("White"))
             for (Vehicle position : vehicles)
@@ -159,6 +172,13 @@ public class ParkingLotSystem {
                 "No white color vehicle found");
     }
 
+    /**
+     * Purpose: To Find the number plate of the blue color Vehicle Parked
+     *
+     * @param vehicle is passed as parameter to find the number plate of the vehicle
+     * @return the position of the number plate of the vehicle
+     * @throws ParkingLotException : when there is no vehicle found
+     */
     public String getNumberPlateOfBlueColorVehicle(Vehicle vehicle) throws ParkingLotException{
         if (isVehicleParked(vehicle)
                 && vehicle.getVehicleColour().equals("Blue")
@@ -183,6 +203,13 @@ public class ParkingLotSystem {
                 "No such vehicle found");
     }
 
+    /**
+     * Purpose: To Find the all BMW Vehicle Parked in the parking lot system
+     *
+     * @param vehicle is passed as parameter to find the all BMW vehicle
+     * @return the all BMW vehicles
+     * @throws ParkingLotException : when there is no vehicle found
+     */
     public int getBMWVehiclePosition(Vehicle vehicle) throws ParkingLotException{
         if (isVehicleParked(vehicle)
                 && vehicle.getName().equals("BMW"))
@@ -194,6 +221,12 @@ public class ParkingLotSystem {
                 "No such vehicle found");
     }
 
+    /**
+     * Purpose : This method is checking the validity of vehicle number plates
+     *
+     * @param vehicleNumber : takes vehicle number as parameter for checking validation of number plate
+     * @return : the matching value of that vehicle number if true or false
+     */
     public boolean validateVehicleNumberPlate(String vehicleNumber) {
         Pattern pattern = Pattern.compile("^[A-Z]{2}[ -][0-9]{2}[A-Z]{2}[0-9]{4}$");
         Matcher matcher = pattern.matcher(vehicleNumber);

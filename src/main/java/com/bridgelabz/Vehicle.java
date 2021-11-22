@@ -19,6 +19,7 @@ public class Vehicle {
      * @param name defines the name of the vehicle
      * @param vehicleNumber define the particular number of the given vehicle
      * @param parkingTime define the time when the vehicle is going to be parked
+     * @param vehicleColour define the colour of the parked vehicle
      */
     public Vehicle(String name, String vehicleNumber, String parkingTime, String vehicleColour) {
         this.name = name;
@@ -54,6 +55,11 @@ public class Vehicle {
         return parkingTime;
     }
 
+    /**
+     * Purpose : This method is used to get the colour of the vehicle parked in the ParkingLot
+     *
+     * @return colour of the vehicle
+     */
     public String getVehicleColour(){
         return vehicleColour;
     }
