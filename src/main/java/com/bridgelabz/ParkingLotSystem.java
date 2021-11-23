@@ -2,6 +2,14 @@ package com.bridgelabz;
 
 import java.util.*;
 
+/**
+ * Purpose : To Simulate ParkingLot system
+ *
+ * @author Sampriti Roy Chowdhury
+ * @version 0.0.1
+ * @since 14-11-2021
+ */
+
 public class ParkingLotSystem {
     private static List<ParkingLotObserver> observers;
     private static int actualCapacity;
@@ -18,18 +26,18 @@ public class ParkingLotSystem {
     }
 
     /**
-     * This method is used to set the capacity of the parking lot.
+     * Purpose : This method is used to set the capacity of the parking lot.
      *
-     * @param capacity - size of the parking lot.
+     * @param capacity defines the size of the parking lot.
      */
     public void setCapacityOfParkingLot(int capacity) {
         actualCapacity = capacity;
     }
 
     /**
-     * This method is used to register the observers of parking lot.
+     * Purpose : This method is used to register the observers of parking lot.
      *
-     * @param observer - The observer of the parking lot.
+     * @param observer defines the observer of the parking lot.
      */
     public void registerParkingLotObserver(ParkingLotObserver observer) {
         observers.add(observer);
@@ -185,23 +193,23 @@ public class ParkingLotSystem {
      * the parking lots.
      */
     public List getWhiteColorVehiclePosition() throws ParkingLotException {
-        ArrayList temp = new ArrayList();
+        ArrayList listOfWhiteVehicles = new ArrayList();
         for (Vehicle vehicle : parkingLot1) {
             if (vehicle.getColor().equals("White"))
-                temp.add("ParkingLot1: "+ parkingLot1.indexOf(vehicle));
+                listOfWhiteVehicles.add("ParkingLot1: "+ parkingLot1.indexOf(vehicle));
         }
         for (Vehicle vehicle : parkingLot2) {
             if (vehicle.getColor().equals("White"))
-                temp.add("ParkingLot2: "+ parkingLot2.indexOf(vehicle));
+                listOfWhiteVehicles.add("ParkingLot2: "+ parkingLot2.indexOf(vehicle));
         }
         for (Vehicle vehicle : parkingLotForHandicapped) {
             if (vehicle.getColor().equals("White"))
-                temp.add("HandicapParkingLot: "+ parkingLot2.indexOf(vehicle));
+                listOfWhiteVehicles.add("HandicapParkingLot: "+ parkingLot2.indexOf(vehicle));
         }
-        if(temp.size() == 0)
+        if(listOfWhiteVehicles.size() == 0)
             throw new ParkingLotException(ParkingLotException.ExceptionType.VEHICLE_NOT_FOUND,
                     "No White Color Vehicle Found");
-        return temp;
+        return listOfWhiteVehicles;
     }
 
     /**
@@ -212,30 +220,30 @@ public class ParkingLotSystem {
      * the parking lots.
      */
     public List getBlueToyotaVehicles() throws ParkingLotException {
-        ArrayList temp = new ArrayList();
+        ArrayList listOfBlueToyotaVehicles = new ArrayList();
         for (Vehicle vehicle : parkingLot1) {
             if (vehicle.getName().equals("Toyota") && vehicle.getColor().equals("Blue")) {
-                temp.add("Name of Parking Attendant = " + vehicle.getParkingAttendantName() + " Plate Number = " +
+                listOfBlueToyotaVehicles.add("Name of Parking Attendant = " + vehicle.getParkingAttendantName() + " Plate Number = " +
                         vehicle.getNumberPlate() + " Location = ParkingLot 1: " + parkingLot1.indexOf(vehicle));
             }
         }
         for (Vehicle vehicle : parkingLot2) {
             if (vehicle.getName().equals("Toyota") && vehicle.getColor().equals("Blue")) {
-                temp.add("Name of Parking Attendant = " + vehicle.getParkingAttendantName() + " Plate Number = " +
+                listOfBlueToyotaVehicles.add("Name of Parking Attendant = " + vehicle.getParkingAttendantName() + " Plate Number = " +
                         vehicle.getNumberPlate() + " Location = ParkingLot 2: " + parkingLot2.indexOf(vehicle));
             }
         }
         for (Vehicle vehicle : parkingLotForHandicapped) {
             if (vehicle.getName().equals("Toyota") && vehicle.getColor().equals("Blue")) {
-                temp.add("Name of Parking Attendant = " + vehicle.getParkingAttendantName() + " Plate Number = " +
+                listOfBlueToyotaVehicles.add("Name of Parking Attendant = " + vehicle.getParkingAttendantName() + " Plate Number = " +
                         vehicle.getNumberPlate() + " Location = HandicapLot : " +
                         parkingLotForHandicapped.indexOf(vehicle));
             }
         }
-        if(temp.size() == 0)
+        if(listOfBlueToyotaVehicles.size() == 0)
             throw new ParkingLotException(ParkingLotException.ExceptionType.VEHICLE_NOT_FOUND,
                     "No Blue Toyota Vehicle Found");
-        return temp;
+        return listOfBlueToyotaVehicles;
     }
 
     /**
@@ -246,54 +254,64 @@ public class ParkingLotSystem {
      * the parking lots.
      */
     public List getBMWVehicles() throws ParkingLotException {
-        ArrayList temp = new ArrayList();
+        ArrayList listOfBMWVehicles = new ArrayList();
         for (Vehicle vehicle : parkingLot1) {
             if (vehicle.getName().equals("BMW")) {
-                temp.add(vehicle);
+                listOfBMWVehicles.add(vehicle);
             }
         }
         for (Vehicle vehicle : parkingLot2) {
             if (vehicle.getName().equals("BMW")) {
-                temp.add(vehicle);
+                listOfBMWVehicles.add(vehicle);
             }
         }
         for (Vehicle vehicle : parkingLotForHandicapped) {
             if (vehicle.getName().equals("BMW")) {
-                temp.add(vehicle);
+                listOfBMWVehicles.add(vehicle);
             }
         }
-        if(temp.size() == 0)
+        if(listOfBMWVehicles.size() == 0)
             throw new ParkingLotException(ParkingLotException.ExceptionType.VEHICLE_NOT_FOUND,
                     "No BMW Vehicles Found");
-        return temp;
+        return listOfBMWVehicles;
     }
 
+    /**
+     * Purpose : This method is used to get the list of all Handicapped vehicles
+     *
+     * @return the list of Handicapped vehicles
+     */
     public List getHandicappedVehicles(){
-        ArrayList temp = new ArrayList();
+        ArrayList handicappedVehicles = new ArrayList();
         for (Vehicle vehicle : parkingLotForHandicapped) {
             if (vehicle.getVehicleType() == Vehicle.VehicleType.SMALL)
-                temp.add(vehicle);
+                handicappedVehicles.add(vehicle);
         }
-        if(temp.size() == 0)
+        if(handicappedVehicles.size() == 0)
             throw new ParkingLotException(ParkingLotException.ExceptionType.VEHICLE_NOT_FOUND,
                     "No Vehicles Found");
-        return temp;
+        return handicappedVehicles;
     }
 
+    /**
+     * Purpose : This method is used to get the list of all parked vehicles in the ParkingLot
+     *
+     * @return the list of parked vehicles
+     */
     public List getAllVehicles(){
-        ArrayList temp = new ArrayList();
+        ArrayList vehicleList = new ArrayList();
         for (Vehicle vehicle : parkingLotForHandicapped) {
-            temp.add(vehicle);
+            vehicleList.add(vehicle);
         }
         for (Vehicle vehicle : parkingLot1) {
-            temp.add(vehicle);
+            vehicleList.add(vehicle);
         }
         for (Vehicle vehicle : parkingLot2) {
-            temp.add(vehicle);
+            vehicleList.add(vehicle);
         }
-        if(temp.size() == 0)
+        if(vehicleList.size() == 0)
             throw new ParkingLotException(ParkingLotException.ExceptionType.VEHICLE_NOT_FOUND,
                     "No Vehicles Present");
-        return temp;
+        return vehicleList;
     }
 }

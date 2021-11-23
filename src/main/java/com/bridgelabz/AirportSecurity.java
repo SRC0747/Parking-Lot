@@ -29,8 +29,7 @@ public class AirportSecurity implements ParkingLotObserver {
     }
 
     /**
-     * This method is to quarry if the capacity of parking lot is
-     * full or not.
+     * Purpose : This method is to quarry if the capacity of parking lot is full or not
      *
      * @return boolean - true if capacity is full else false.
      */

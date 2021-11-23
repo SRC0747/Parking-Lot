@@ -11,7 +11,11 @@ package com.bridgelabz;
 public class ParkingLotException extends RuntimeException {
     private final ExceptionType exceptionType;
 
-    //constructor to initialize variables.
+    /**
+     * Purpose : Constructor to initialize the type of exception occurred and throwing the message
+     * @param type defines which type of exception is occurred
+     * @param message define the message thrown while exception is occurred
+     */
     public ParkingLotException(ExceptionType type, String message) {
         super(message);
         this.exceptionType = type;
