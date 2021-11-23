@@ -11,4 +11,8 @@ package com.bridgelabz;
 public interface ParkingLotObserver {
     public void capacityIsFull();
     boolean isCapacityFull();
+    /**
+     * This method is to find if the capacity is available in the parking lot.
+     */
+    public void capacityIsAvailable();
 }

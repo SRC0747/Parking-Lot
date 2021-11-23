@@ -9,23 +9,32 @@ package com.bridgelabz;
  */
 
 public class ParkingLotOwner implements ParkingLotObserver {
-    private boolean actualCapacity;
+    private boolean isFullCapacity;
+
 
     /**
-     * capacityIsFull initialize the capacity of ParkingLot through which it indicates that ParkingLot is full
+     * This method is to say that the capacity is full.
      */
     @Override
     public void capacityIsFull() {
-        actualCapacity = true;
+        isFullCapacity = true;
+    }
+    /**
+     * This method is to find if the capacity is available in the parking lot.
+     */
+    @Override
+    public void capacityIsAvailable() {
+        isFullCapacity = false;
     }
 
     /**
-     * Purpose : This method is used to check the full capacity of ParkingLot
+     * This method is to quarry if the capacity of parking lot is
+     * full or not.
      *
-     * @return the actualCapacity of ParkingLo
+     * @return boolean - true if capacity is full else false.
      */
-    @Override
     public boolean isCapacityFull() {
-        return this.actualCapacity;
+        return this.isFullCapacity;
     }
+
 }

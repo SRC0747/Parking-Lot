@@ -9,16 +9,18 @@ package com.bridgelabz;
  */
 
 public class ParkingLotException extends RuntimeException {
-    /**
-     * Purpose : This method throws the exception message of ParkingLot is full
-     *
-     * @param parkingLotIsFull
-     * @param message defines the exception message whether occurred
-     */
-    public ParkingLotException(ExceptionType parkingLotIsFull, String message) {
+    private final ExceptionType exceptionType;
+
+    //constructor to initialize variables.
+    public ParkingLotException(ExceptionType type, String message) {
         super(message);
+        this.exceptionType = type;
     }
 
-    public enum ExceptionType {PARKING_LOT_IS_FULL, NO_SUCH_VEHICLE,
-        VEHICLE_ALREADY_EXIST, VEHICLE_IS_NOT_AVAILABLE }
+    /**
+     * Enum to define the type of exception.
+     */
+    public enum ExceptionType {
+        LOT_IS_FULL, VEHICLE_NOT_FOUND, VEHICLE_ALREADY_PARKED
+    }
 }

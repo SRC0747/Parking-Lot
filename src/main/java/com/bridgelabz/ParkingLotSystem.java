@@ -1,238 +1,299 @@
 package com.bridgelabz;
 
-import java.util.ArrayList;
-import java.util.regex.Pattern;
-import java.util.regex.Matcher;
-
-/**
- * Purpose : Simulate the ParkingLot System
- *
- * @author Sampriti Roy Chowdhury
- * @version 0.0.1
- * @since 14-11-2021
- */
+import java.util.*;
 
 public class ParkingLotSystem {
-    private int currentCapacity;
-    private ArrayList<ParkingLotObserver> observers;
-    private ArrayList<Vehicle> vehicles;
-    private int actualCapacity;
-    private ArrayList<Object> slots;
+    private static List<ParkingLotObserver> observers;
+    private static int actualCapacity;
+    private static List<Vehicle> parkingLot1;
+    private static List<Vehicle> parkingLot2;
+    private static List<Vehicle> parkingLotForHandicapped;
 
-    /**
-     * Constructor to access multiple observers and vehicles to access the capacity of ParkingLot and initialize the actualCapacity of ParkingLot to a particular value.
-     *
-     * @param capacity defines the actualCapacity of ParkingLot
-     */
-    public ParkingLotSystem(int capacity) {
-        this.observers = new ArrayList<>();
-        this.currentCapacity = 0;
-        this.actualCapacity = capacity;
-        initializeParkingLot();
+
+    public ParkingLotSystem() {
+        observers = new ArrayList<>();
+        parkingLot1 = new ArrayList<>();
+        parkingLot2 = new ArrayList<>();
+        parkingLotForHandicapped = new ArrayList<>();
     }
 
     /**
-     * Purpose : Initialize the list of Vehicles with null values
+     * This method is used to set the capacity of the parking lot.
+     *
+     * @param capacity - size of the parking lot.
      */
-    public void initializeParkingLot() {
-        this.vehicles = new ArrayList();
-        for (int i = 0; i < this.actualCapacity; i++) {
-            vehicles.add(i, null);
-        }
+    public void setCapacityOfParkingLot(int capacity) {
+        actualCapacity = capacity;
     }
 
     /**
-     * Purpose : This method created to Park given vehicle in Parking Lot
+     * This method is used to register the observers of parking lot.
      *
-     * @param vehicle given vehicle as parameter to observe the capacity of ParkingLot
-     * @param slot    given slot as to check the available slots in ParkingLot
-     * @throws ParkingLotException : when the parking lot is full
-     */
-    public void park(Vehicle vehicle, Integer slot) throws ParkingLotException {
-        if (this.vehicles.size() == actualCapacity && !this.vehicles.contains(null)) {
-            for (ParkingLotObserver parkingLotSystemObserver : observers)
-                parkingLotSystemObserver.capacityIsFull();
-            throw new ParkingLotException(ParkingLotException.ExceptionType.PARKING_LOT_IS_FULL,
-                    "Parking Lot is Full");
-        }
-        if (this.vehicles.contains(vehicle)) {
-            throw new ParkingLotException(ParkingLotException.ExceptionType.VEHICLE_ALREADY_EXIST,
-                    "Vehicle already exist");
-        }
-        this.vehicles.set(slot, vehicle);
-    }
-
-    /**
-     * Purpose : This method created to UnParked the car from parking lot
-     *
-     * @param vehicle given vehicle as parameter to unPark the car
-     * @throws ParkingLotException : when there is no car to un park
-     */
-    public boolean unPark(Object vehicle) throws ParkingLotException {
-        if (this.vehicles.contains(vehicle)) {
-            this.vehicles.remove(vehicle);
-            return true;
-        }
-        throw new ParkingLotException(ParkingLotException.ExceptionType.NO_SUCH_VEHICLE,
-                "No Such vehicle Found");
-    }
-
-    /**
-     * Purpose : To Check vehicle is Parked in the ParkingLot
-     *
-     * @param vehicle given car as parameter
-     * @return the equal car if matched to Given car
-     */
-    public boolean isVehicleParked(Object vehicle) {
-        return this.vehicles.contains(vehicle);
-    }
-
-    /**
-     * Purpose : To Check a Vehicle is UnParked Or Not
-     *
-     * @param vehicle given Vehicle as parameter
-     * @return The Vehicle is UnParked
-     */
-    public boolean isVehicleUnParked(Vehicle vehicle) {
-        return !this.vehicles.contains(vehicle);
-    }
-
-    /**
-     * Purpose : Register Observer as Like Owner and AirportSecurity In List to be informed about ParkingLot
-     *
-     * @param observer To Add the observers in the List
+     * @param observer - The observer of the parking lot.
      */
     public void registerParkingLotObserver(ParkingLotObserver observer) {
-        this.observers.add(observer);
+        observers.add(observer);
     }
 
     /**
-     * Purpose : Set the actualCapacity of the ParkingLot
+     * Purpose: This method is used to make a vehicle park in the Parking Lot.
      *
-     * @param capacity defines the actual capacity
+     * @param vehicle object to be parked
+     * @throws ParkingLotException if the vehicle is already parked or if the lot
+     *                             is full.
      */
-    public void setCapacity(int capacity) {
-        this.actualCapacity = capacity;
-    }
-
-    /**
-     * Purpose : This method is used to get and access the available slot to park vehicle
-     *
-     * @return availableSlot whether it is available
-     */
-    public ArrayList<Integer> getAvailableListOfSlots() {
-        ArrayList<Integer> availableSlots = new ArrayList<>();
-        for (int i = 0; i < actualCapacity; i++) {
-            if (this.vehicles.get(i) == null) {
-                availableSlots.add(i);
+    public void park(Vehicle vehicle) throws ParkingLotException {
+        if (isVehicleParked(vehicle))
+            throw new ParkingLotException(ParkingLotException.ExceptionType.VEHICLE_ALREADY_PARKED,
+                    "Vehicle is already parked");
+        if (parkingLot1.size() <= actualCapacity && parkingLot2.size() <= actualCapacity
+                && parkingLotForHandicapped.size() <= actualCapacity) {
+            if(vehicle.getPersonType() == Vehicle.PersonType.HANDICAP) {
+                parkingLotForHandicapped.add(vehicle);
+            }
+            else if (parkingLot1.size() > parkingLot2.size()) {
+                parkingLot2.add(vehicle);
+            } else {
+                parkingLot1.add(vehicle);
             }
         }
-        return availableSlots;
-    }
-
-    /**
-     * Purpose : This method created to find the vehicle whether it is parked in the parking lot
-     *
-     * @param vehicle given car as parameter to find the car
-     * @throws ParkingLotException : when no car is found there
-     */
-    public int findVehicle(Object vehicle) throws ParkingLotException {
-        if (this.vehicles.contains(vehicle)) {
-            return this.vehicles.indexOf(vehicle);
+        if (parkingLot1.size() == actualCapacity && parkingLot2.size() == actualCapacity) {
+            for (ParkingLotObserver observers : observers) {
+                observers.capacityIsFull();
+            }
+            throw new ParkingLotException
+                    (ParkingLotException.ExceptionType.LOT_IS_FULL, "The Parking Lot is Full.");
         }
-        throw new ParkingLotException(ParkingLotException.ExceptionType.VEHICLE_IS_NOT_AVAILABLE,
-                "Not find the vehicle to go home.");
     }
 
     /**
-     * Purpose: This method is used to Find the Time when Vehicle Parked
+     * Purpose: This method is used to make a vehicle un-park from the Parking Lot.
      *
-     * @param vehicle is passed as parameter
-     * @return parking time of the vehicle
+     * @param vehicle - object to be un-parked
+     * @return boolean - True if the vehicle is un-parked
+     * else false
+     * @throws ParkingLotException if there is a null or nothing to be un-parked.
      */
-    public String getVehicleParkingTime(Vehicle vehicle) {
-        if (isVehicleParked(vehicle)) {
-            return vehicle.getParkingTime();
+    public boolean unPark(Vehicle vehicle) throws ParkingLotException {
+        for (Vehicle vehicle1 : parkingLot1) {
+            if (vehicle1.equals(vehicle)) {
+                parkingLot1.remove(vehicle);
+                for (ParkingLotObserver observer : observers) {
+                    observer.capacityIsAvailable();
+                }
+                return true;
+            }
         }
-        return null;
-    }
-
-    /**
-     * Purpose: To Find the position of the white color Vehicle Parked
-     *
-     * @param vehicle is passed as parameter to find the position
-     * @return the position of the white color vehicle
-     * @throws ParkingLotException : when there is no vehicle found
-     */
-    public int getPositionOfWhiteColorVehicle(Vehicle vehicle) throws ParkingLotException{
-        if (isVehicleParked(vehicle) && vehicle.getVehicleColour().equals("White"))
-            for (Vehicle position : vehicles)
-                if (position.equals(vehicle)) return vehicles.indexOf(position);
-        throw new ParkingLotException(ParkingLotException.ExceptionType.NO_SUCH_VEHICLE,
-                "No white color vehicle found");
-    }
-
-    /**
-     * Purpose: To Find the number plate of the blue color Vehicle Parked
-     *
-     * @param vehicle is passed as parameter to find the number plate of the vehicle
-     * @return the position of the number plate of the vehicle
-     * @throws ParkingLotException : when there is no vehicle found
-     */
-    public String getNumberPlateOfBlueColorVehicle(Vehicle vehicle) throws ParkingLotException{
-        if (isVehicleParked(vehicle)
-                && vehicle.getVehicleColour().equals("Blue")
-                && vehicle.getName().equals("Toyota"))
-            for (Vehicle numberPlate : vehicles) {
-                if (numberPlate.equals(vehicle))
-                    return numberPlate.getVehicleNumber();
+        for (Vehicle vehicle1 : parkingLot2) {
+            if (vehicle1.equals(vehicle)) {
+                parkingLot2.remove(vehicle);
+                for (ParkingLotObserver observer : observers) {
+                    observer.capacityIsAvailable();
+                }
+                return true;
             }
-        throw new ParkingLotException(ParkingLotException.ExceptionType.NO_SUCH_VEHICLE,
-                "No such vehicle found");
+        }
+        for (Vehicle vehicle1 : parkingLotForHandicapped) {
+            if (vehicle1.equals(vehicle)) {
+                parkingLotForHandicapped.remove(vehicle);
+                for (ParkingLotObserver observer : observers) {
+                    observer.capacityIsAvailable();
+                }
+                return true;
+            }
+        }
+        throw new ParkingLotException
+                (ParkingLotException.ExceptionType.VEHICLE_NOT_FOUND, "There is no such vehicle");
     }
 
-    public int getPositionOfBlueColorVehicle(Vehicle vehicle) throws ParkingLotException{
-        if (isVehicleParked(vehicle)
-                && vehicle.getVehicleColour().equals("Blue")
-                && vehicle.getName().equals("Toyota"))
-            for (Vehicle position : vehicles) {
-                if (position.equals(vehicle))
-                    return vehicles.indexOf(position);
-            }
-        throw new ParkingLotException(ParkingLotException.ExceptionType.NO_SUCH_VEHICLE,
-                "No such vehicle found");
+
+    /**
+     * This method is used to check if the vehicle is parked or not.
+     *
+     * @param vehicle object to be checked if parked or not.
+     * @return boolean true if vehicle is parked or else false.
+     */
+    public boolean isVehicleParked(Vehicle vehicle) {
+        boolean isParked = false;
+        for (Vehicle vehicle1 : parkingLot1) {
+            if (vehicle1.equals(vehicle))
+                isParked = true;
+        }
+        for (Vehicle vehicle1 : parkingLot2) {
+            if (vehicle1.equals(vehicle))
+                isParked = true;
+        }
+        for (Vehicle vehicle1 : parkingLotForHandicapped) {
+            if (vehicle1.equals(vehicle))
+                isParked = true;
+        }
+        return isParked;
     }
 
     /**
-     * Purpose: To Find the all BMW Vehicle Parked in the parking lot system
+     * This method is used to check if the vehicle is un-parked or not.
      *
-     * @param vehicle is passed as parameter to find the all BMW vehicle
-     * @return the all BMW vehicles
-     * @throws ParkingLotException : when there is no vehicle found
+     * @param vehicle object to be checked if un-parked or not.
+     * @return boolean true if vehicle is un-parked or else false.
      */
-    public int getBMWVehiclePosition(Vehicle vehicle) throws ParkingLotException{
-        if (isVehicleParked(vehicle)
-                && vehicle.getName().equals("BMW"))
-            for (Vehicle position : vehicles) {
-                if (position.equals(vehicle))
-                    return vehicles.indexOf(position);
-            }
-        throw new ParkingLotException(ParkingLotException.ExceptionType.NO_SUCH_VEHICLE,
-                "No such vehicle found");
+    public boolean isVehicleUnParked(Vehicle vehicle) {
+        boolean isUnParked = true;
+        for (Vehicle vehicle1 : parkingLot1) {
+            if (vehicle1.equals(vehicle))
+                isUnParked = false;
+        }
+        for (Vehicle vehicle1 : parkingLot2) {
+            if (vehicle1.equals(vehicle))
+                isUnParked = false;
+        }
+        for (Vehicle vehicle1 : parkingLotForHandicapped) {
+            if (vehicle1.equals(vehicle))
+                isUnParked = false;
+        }
+        return isUnParked;
     }
 
     /**
-     * Purpose : This method is checking the validity of vehicle number plates
+     * This method is used to find the vehicle in the parking lot.
      *
-     * @param vehicleNumber : takes vehicle number as parameter for checking validation of number plate
-     * @return : the matching value of that vehicle number if true or false
+     * @param vehicle object to find.
+     * @return object of vehicle if present.
+     * @throws ParkingLotException if there is no such vehicle as passed in
+     *                             the parameter in the parking lots.
      */
-    public boolean validateVehicleNumberPlate(String vehicleNumber) {
-        Pattern pattern = Pattern.compile("^[A-Z]{2}[ -][0-9]{2}[A-Z]{2}[0-9]{4}$");
-        Matcher matcher = pattern.matcher(vehicleNumber);
-        boolean number = matcher.matches();
-        if (vehicleNumber.isEmpty())
-            return false;
-        return number;
+    public Vehicle findVehicle(Vehicle vehicle) throws ParkingLotException {
+        for (Vehicle vehicle1 : parkingLot1) {
+            if (vehicle1.equals(vehicle))
+                return vehicle1;
+        }
+        for (Vehicle vehicle1 : parkingLot2) {
+            if (vehicle1.equals(vehicle))
+                return vehicle1;
+        }
+        for (Vehicle vehicle1 : parkingLotForHandicapped) {
+            if (vehicle1.equals(vehicle))
+                return vehicle1;
+        }
+        throw new ParkingLotException(ParkingLotException.ExceptionType.VEHICLE_NOT_FOUND, "No Such Vehicle Found");
+    }
+
+    /**
+     * This method is to find all the white vehicles that are present in the parking lots.
+     *
+     * @return List of white vehicles.
+     * @throws ParkingLotException when there are no white vehicles present in
+     * the parking lots.
+     */
+    public List getWhiteColorVehiclePosition() throws ParkingLotException {
+        ArrayList temp = new ArrayList();
+        for (Vehicle vehicle : parkingLot1) {
+            if (vehicle.getColor().equals("White"))
+                temp.add("ParkingLot1: "+ parkingLot1.indexOf(vehicle));
+        }
+        for (Vehicle vehicle : parkingLot2) {
+            if (vehicle.getColor().equals("White"))
+                temp.add("ParkingLot2: "+ parkingLot2.indexOf(vehicle));
+        }
+        for (Vehicle vehicle : parkingLotForHandicapped) {
+            if (vehicle.getColor().equals("White"))
+                temp.add("HandicapParkingLot: "+ parkingLot2.indexOf(vehicle));
+        }
+        if(temp.size() == 0)
+            throw new ParkingLotException(ParkingLotException.ExceptionType.VEHICLE_NOT_FOUND,
+                    "No White Color Vehicle Found");
+        return temp;
+    }
+
+    /**
+     * This method is to find all the Blue Toyota vehicles that are present in the parking lots.
+     *
+     * @return List of Blue Toyota vehicles.
+     * @throws ParkingLotException when there are no Blue Toyota vehicles present in
+     * the parking lots.
+     */
+    public List getBlueToyotaVehicles() throws ParkingLotException {
+        ArrayList temp = new ArrayList();
+        for (Vehicle vehicle : parkingLot1) {
+            if (vehicle.getName().equals("Toyota") && vehicle.getColor().equals("Blue")) {
+                temp.add("Name of Parking Attendant = " + vehicle.getParkingAttendantName() + " Plate Number = " +
+                        vehicle.getNumberPlate() + " Location = ParkingLot 1: " + parkingLot1.indexOf(vehicle));
+            }
+        }
+        for (Vehicle vehicle : parkingLot2) {
+            if (vehicle.getName().equals("Toyota") && vehicle.getColor().equals("Blue")) {
+                temp.add("Name of Parking Attendant = " + vehicle.getParkingAttendantName() + " Plate Number = " +
+                        vehicle.getNumberPlate() + " Location = ParkingLot 2: " + parkingLot2.indexOf(vehicle));
+            }
+        }
+        for (Vehicle vehicle : parkingLotForHandicapped) {
+            if (vehicle.getName().equals("Toyota") && vehicle.getColor().equals("Blue")) {
+                temp.add("Name of Parking Attendant = " + vehicle.getParkingAttendantName() + " Plate Number = " +
+                        vehicle.getNumberPlate() + " Location = HandicapLot : " +
+                        parkingLotForHandicapped.indexOf(vehicle));
+            }
+        }
+        if(temp.size() == 0)
+            throw new ParkingLotException(ParkingLotException.ExceptionType.VEHICLE_NOT_FOUND,
+                    "No Blue Toyota Vehicle Found");
+        return temp;
+    }
+
+    /**
+     * This method is to find all the BMW vehicles that are present in the parking lots.
+     *
+     * @return List of BMW vehicles.
+     * @throws ParkingLotException when there are no BMW vehicles present in
+     * the parking lots.
+     */
+    public List getBMWVehicles() throws ParkingLotException {
+        ArrayList temp = new ArrayList();
+        for (Vehicle vehicle : parkingLot1) {
+            if (vehicle.getName().equals("BMW")) {
+                temp.add(vehicle);
+            }
+        }
+        for (Vehicle vehicle : parkingLot2) {
+            if (vehicle.getName().equals("BMW")) {
+                temp.add(vehicle);
+            }
+        }
+        for (Vehicle vehicle : parkingLotForHandicapped) {
+            if (vehicle.getName().equals("BMW")) {
+                temp.add(vehicle);
+            }
+        }
+        if(temp.size() == 0)
+            throw new ParkingLotException(ParkingLotException.ExceptionType.VEHICLE_NOT_FOUND,
+                    "No BMW Vehicles Found");
+        return temp;
+    }
+
+    public List getHandicappedVehicles(){
+        ArrayList temp = new ArrayList();
+        for (Vehicle vehicle : parkingLotForHandicapped) {
+            if (vehicle.getVehicleType() == Vehicle.VehicleType.SMALL)
+                temp.add(vehicle);
+        }
+        if(temp.size() == 0)
+            throw new ParkingLotException(ParkingLotException.ExceptionType.VEHICLE_NOT_FOUND,
+                    "No Vehicles Found");
+        return temp;
+    }
+
+    public List getAllVehicles(){
+        ArrayList temp = new ArrayList();
+        for (Vehicle vehicle : parkingLotForHandicapped) {
+            temp.add(vehicle);
+        }
+        for (Vehicle vehicle : parkingLot1) {
+            temp.add(vehicle);
+        }
+        for (Vehicle vehicle : parkingLot2) {
+            temp.add(vehicle);
+        }
+        if(temp.size() == 0)
+            throw new ParkingLotException(ParkingLotException.ExceptionType.VEHICLE_NOT_FOUND,
+                    "No Vehicles Present");
+        return temp;
     }
 }
