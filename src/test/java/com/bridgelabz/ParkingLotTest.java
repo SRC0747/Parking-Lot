@@ -314,4 +314,15 @@ public class ParkingLotTest {
         List actualList = policeDepartment.vehicleNumberValidate();
         Assertions.assertEquals(expectedList, actualList);
     }
+
+    @Test
+    public void givenVehicle_WhenCheckedVehicleNumber_ShouldPassVehicleNumberPlateValidation() throws ParkingLotException {
+        parkingLotSystem.setCapacityOfParkingLot(7);
+        ParkingLotAttendant parkingLotAttendant = new ParkingLotAttendant();
+        vehicle = new Vehicle(Vehicle.VehicleType.MEDIUM, Vehicle.PersonType.NORMAL,
+                "Mercedes", "7747", "Red", "Niraj");
+        parkingLotAttendant.parkVehicleByAttendant(vehicle);
+        Assertions.assertTrue(parkingLotSystem.isVehicleParked(vehicle));
+
+    }
 }
