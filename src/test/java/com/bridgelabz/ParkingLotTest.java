@@ -46,6 +46,11 @@ public class ParkingLotTest {
         Assertions.assertThrows(ParkingLotException.class, () -> parkingLotSystem.park(vehicle));
     }
 
+    @Test
+    public void givenANullVehicle_WhenUnParked_ShouldThrowException() {
+        Assertions.assertThrows(ParkingLotException.class, () -> parkingLotSystem.unPark(vehicle));
+    }
+
     public void givenAVehicle_WhenLotIsFullParked_ShouldThrowException() {
         vehicle = new Vehicle(Vehicle.VehicleType.MEDIUM, Vehicle.PersonType.NORMAL,
                 "Audi", "7747", "Black", "Rakesh");
@@ -325,4 +330,5 @@ public class ParkingLotTest {
         Assertions.assertTrue(parkingLotSystem.isVehicleParked(vehicle));
 
     }
+
 }

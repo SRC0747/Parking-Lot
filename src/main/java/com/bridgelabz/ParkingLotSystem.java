@@ -124,16 +124,22 @@ public class ParkingLotSystem {
     public boolean isVehicleParked(Vehicle vehicle) {
         boolean isParked = false;
         for (Vehicle vehicle1 : parkingLot1) {
-            if (vehicle1.equals(vehicle))
+            if (vehicle1.equals(vehicle)) {
                 isParked = true;
+                break;
+            }
         }
         for (Vehicle vehicle1 : parkingLot2) {
-            if (vehicle1.equals(vehicle))
+            if (vehicle1.equals(vehicle)) {
                 isParked = true;
+                break;
+            }
         }
         for (Vehicle vehicle1 : parkingLotForHandicapped) {
-            if (vehicle1.equals(vehicle))
+            if (vehicle1.equals(vehicle)) {
                 isParked = true;
+                break;
+            }
         }
         return isParked;
     }
@@ -147,16 +153,22 @@ public class ParkingLotSystem {
     public boolean isVehicleUnParked(Vehicle vehicle) {
         boolean isUnParked = true;
         for (Vehicle vehicle1 : parkingLot1) {
-            if (vehicle1.equals(vehicle))
+            if (vehicle1.equals(vehicle)) {
                 isUnParked = false;
+                break;
+            }
         }
         for (Vehicle vehicle1 : parkingLot2) {
-            if (vehicle1.equals(vehicle))
+            if (vehicle1.equals(vehicle)) {
                 isUnParked = false;
+                break;
+            }
         }
         for (Vehicle vehicle1 : parkingLotForHandicapped) {
-            if (vehicle1.equals(vehicle))
+            if (vehicle1.equals(vehicle)) {
                 isUnParked = false;
+                break;
+            }
         }
         return isUnParked;
     }
