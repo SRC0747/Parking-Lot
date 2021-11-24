@@ -1,8 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.bridgelabz.ParkingLotTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-11-24T15:18:34" hostname="DESKTOP-U9VT6NQ" time="0.109">
+<testsuite name="com.bridgelabz.ParkingLotTest" tests="18" skipped="0" failures="0" errors="0" timestamp="2021-11-24T16:25:46" hostname="DESKTOP-U9VT6NQ" time="1.308">
   <properties/>
-  <testcase name="givenAVehicle_WhenParked_ThenCheckTimeOfParking_ShouldReturnParkingTime()" classname="com.bridgelabz.ParkingLotTest" time="0.109"/>
-  <system-out><![CDATA[20:48:34.239429400
+  <testcase name="givenPoliceDepartment_WheSearchForHandicapVehicles_ShouldThrowException()" classname="com.bridgelabz.ParkingLotTest" time="0.233"/>
+  <testcase name="givenPoliceDepartment_WhenSearchForBlueToyotaVehicles_ShouldReturnTrue()" classname="com.bridgelabz.ParkingLotTest" time="0.524"/>
+  <testcase name="givenPoliceDepartment_WhenBMWVehicles_ShouldReturnTrue()" classname="com.bridgelabz.ParkingLotTest" time="0.011"/>
+  <testcase name="givenWhenParkingLotIsFull_ShouldInformTheSecurity()" classname="com.bridgelabz.ParkingLotTest" time="0.075"/>
+  <testcase name="givenPoliceDepartment_WhenThereAreNoBlueToyotaVehicles_ShouldThrowException()" classname="com.bridgelabz.ParkingLotTest" time="0.011"/>
+  <testcase name="givenADriver_WhenWantsToFindVehicle_ShouldReturnTrue()" classname="com.bridgelabz.ParkingLotTest" time="0.015"/>
+  <testcase name="givenVehicles_WhenEvenlyParked_ShouldReturnTrue()" classname="com.bridgelabz.ParkingLotTest" time="0.02"/>
+  <testcase name="givenPoliceDepartment_WhenSearchForWhiteVehicles_ShouldReturnTrue()" classname="com.bridgelabz.ParkingLotTest" time="0.019"/>
+  <testcase name="givenAVehicle_WhenParked_ShouldReturnTrue()" classname="com.bridgelabz.ParkingLotTest" time="0.003"/>
+  <testcase name="givenPoliceDepartment_WhenThereAreNoWhiteVehicles_ShouldThrowException()" classname="com.bridgelabz.ParkingLotTest" time="0.06"/>
+  <testcase name="givenVehicle_WhenCheckedVehicleNumber_ShouldPassVehicleNumberPlateValidation()" classname="com.bridgelabz.ParkingLotTest" time="0.012"/>
+  <testcase name="givenWhenParkingLotIsFull_ShouldInformTheOwner()" classname="com.bridgelabz.ParkingLotTest" time="0.029"/>
+  <testcase name="givenANullVehicle_WhenUnParked_ShouldThrowException()" classname="com.bridgelabz.ParkingLotTest" time="0.005"/>
+  <testcase name="givenHandicappedPerson_WhenParkedVehicleByAttendantShouldReturnTrue()" classname="com.bridgelabz.ParkingLotTest" time="0.005"/>
+  <testcase name="givenAVehicle_WhenUnParked_ShouldReturnTrue()" classname="com.bridgelabz.ParkingLotTest" time="0.009"/>
+  <testcase name="givenAVehicle_WhenAlreadyParked_ShouldThrowException()" classname="com.bridgelabz.ParkingLotTest" time="0.009"/>
+  <testcase name="givenToParkVehicleByAttendant_ShouldReturnTrue()" classname="com.bridgelabz.ParkingLotTest" time="0.003"/>
+  <testcase name="givenAVehicle_WhenParked_ThenCheckTimeOfParking_ShouldReturnParkingTime()" classname="com.bridgelabz.ParkingLotTest" time="0.035"/>
+  <system-out><![CDATA[21:55:47.735882300
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

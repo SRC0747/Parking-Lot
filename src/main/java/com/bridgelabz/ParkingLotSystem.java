@@ -1,5 +1,6 @@
 package com.bridgelabz;
 
+import java.time.LocalTime;
 import java.util.*;
 
 /**
@@ -325,5 +326,21 @@ public class ParkingLotSystem {
             throw new ParkingLotException(ParkingLotException.ExceptionType.VEHICLE_NOT_FOUND,
                     "No Vehicles Present");
         return vehicleList;
+    }
+
+    public int getLast30MinuteParkedVehicles(LocalTime time) throws ParkingLotException {
+        for (Vehicle slot : parkingLot1) {
+            if (slot.getParkingTime().minusMinutes(30).equals(time))
+                return parkingLot1.indexOf(slot);
+        }
+        for (Vehicle slot : parkingLot2) {
+            if (slot.getParkingTime().minusMinutes(30).equals(time))
+                return parkingLot2.indexOf(slot);
+        }
+        for (Vehicle slot : parkingLotForHandicapped) {
+            if (slot.getParkingTime().minusMinutes(30).equals(time))
+                return parkingLotForHandicapped.indexOf(slot);
+        }
+        throw new ParkingLotException(ParkingLotException.ExceptionType.VEHICLE_NOT_FOUND, "No such vehicle found");
     }
 }

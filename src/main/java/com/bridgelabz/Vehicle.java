@@ -1,5 +1,7 @@
 package com.bridgelabz;
 
+import java.time.LocalTime;
+
 /**
  * Purpose : Create and add different properties(Vehicle name, Vehicle number and ParkingTime) of Vehicle parked in ParkingLot
  *
@@ -14,18 +16,24 @@ public class Vehicle {
     private final String parkingAttendantName;
     private final VehicleType vehicleType;
     private final PersonType personType;
+    private LocalTime parkingTime;
 
     //constructor to initialize variables.
-    public Vehicle(VehicleType type, PersonType personType, String name, String numberPlate, String color, String parkingAttendantName) {
+    public Vehicle(VehicleType type, PersonType personType, String name, String numberPlate, String color, String parkingAttendantName, LocalTime parkingTime) {
         this.name = name;
         this.numberPlate = numberPlate;
         this.color = color;
         this.parkingAttendantName = parkingAttendantName;
         this.vehicleType = type;
         this.personType = personType;
+        this.parkingTime = parkingTime;
     }
     public VehicleType getVehicleType() {
         return vehicleType;
+    }
+
+    public LocalTime getParkingTime() {
+        return parkingTime;
     }
 
     enum PersonType{
