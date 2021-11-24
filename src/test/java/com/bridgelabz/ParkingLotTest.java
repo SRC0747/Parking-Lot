@@ -307,6 +307,36 @@ public class ParkingLotTest {
     }
 
     @Test
+    public void givenAVehicle_WhenParkedForLast30Minutes_ShouldReturnThePosition() throws ParkingLotException {
+        parkingLotSystem.setCapacityOfParkingLot(7);
+        vehicle = new Vehicle(Vehicle.VehicleType.SMALL, Vehicle.PersonType.HANDICAP,
+                "Mercedes", "TS10ML10", "Blue", "Riya", LocalTime.now());
+        Vehicle vehicle2 = new Vehicle(Vehicle.VehicleType.MEDIUM, Vehicle.PersonType.NORMAL,
+                "Audi", "TS10L10", "Black", "Riya", LocalTime.now());
+        Vehicle vehicle3 = new Vehicle(Vehicle.VehicleType.MEDIUM, Vehicle.PersonType.NORMAL,
+                "Toyota", "T10ML10", "Violet", "Riya", LocalTime.now());
+        Vehicle vehicle4 = new Vehicle(Vehicle.VehicleType.SMALL, Vehicle.PersonType.NORMAL,
+                "Yamaha", "TS10ML10000", "Black", "Riya", LocalTime.now());
+        Vehicle vehicle5 = new Vehicle(Vehicle.VehicleType.MEDIUM, Vehicle.PersonType.NORMAL,
+                "Volvo", "TS10ML1045", "Black", "Riya", LocalTime.now());
+        parkingLotSystem.park(vehicle);
+        parkingLotSystem.park(vehicle2);
+        parkingLotSystem.park(vehicle3);
+        parkingLotSystem.park(vehicle4);
+        parkingLotSystem.park(vehicle5);
+        Assertions.assertThrows(ParkingLotException.class,
+                ()-> parkingLotSystem.getLast30MinuteParkedVehicles(vehicle.getParkingTime()));
+        Assertions.assertThrows(ParkingLotException.class,
+                ()-> parkingLotSystem.getLast30MinuteParkedVehicles(vehicle2.getParkingTime()));
+        Assertions.assertThrows(ParkingLotException.class,
+                ()-> parkingLotSystem.getLast30MinuteParkedVehicles(vehicle3.getParkingTime()));
+        Assertions.assertThrows(ParkingLotException.class,
+                ()-> parkingLotSystem.getLast30MinuteParkedVehicles(vehicle4.getParkingTime()));
+        Assertions.assertThrows(ParkingLotException.class,
+                ()-> parkingLotSystem.getLast30MinuteParkedVehicles(vehicle5.getParkingTime()));
+    }
+
+    @Test
     public void givenVehicle_WhenCheckedVehicleNumber_ShouldPassVehicleNumberPlateValidation() throws ParkingLotException {
         parkingLotSystem.setCapacityOfParkingLot(7);
         ParkingLotAttendant parkingLotAttendant = new ParkingLotAttendant();
