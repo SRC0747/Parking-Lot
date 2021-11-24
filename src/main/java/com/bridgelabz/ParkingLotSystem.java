@@ -18,7 +18,6 @@ public class ParkingLotSystem {
     private static List<Vehicle> parkingLot2;
     private static List<Vehicle> parkingLotForHandicapped;
 
-
     public ParkingLotSystem() {
         observers = new ArrayList<>();
         parkingLot1 = new ArrayList<>();
@@ -328,6 +327,13 @@ public class ParkingLotSystem {
         return vehicleList;
     }
 
+    /**
+     * Purpose : This method is created to get back the position of the vehicle which is parked for last 30 minutes
+     *
+     * @param time defines localTime of the parked vehicle
+     * @return the index position of the vehicle in parking lot
+     * @throws ParkingLotException throws exception when no vehicle is found parked for last 30 minutes
+     */
     public int getLast30MinuteParkedVehicles(LocalTime time) throws ParkingLotException {
         for (Vehicle slot : parkingLot1) {
             if (slot.getParkingTime().minusMinutes(30).equals(time))
