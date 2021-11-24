@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -318,6 +319,17 @@ public class ParkingLotTest {
         expectedList.add(vehicle3);
         List actualList = policeDepartment.vehicleNumberValidate();
         Assertions.assertEquals(expectedList, actualList);
+    }
+
+    @Test
+    public void givenAVehicle_WhenParked_ThenCheckTimeOfParking_ShouldReturnParkingTime() throws ParkingLotException {
+        vehicle = new Vehicle(Vehicle.VehicleType.SMALL, Vehicle.PersonType.NORMAL,
+                "Mercedes", "TS10ML10", "Blue", "Soumen");
+        parkingLotSystem.park(vehicle);
+        LocalTime now = LocalTime.now();
+        String vehicleParkingTime = now.toString();
+        System.out.println(vehicleParkingTime);
+        Assertions.assertEquals(now.toString(), vehicleParkingTime);
     }
 
     @Test

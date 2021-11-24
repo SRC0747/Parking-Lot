@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.bridgelabz.ParkingLotTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-11-24T15:05:12" hostname="DESKTOP-U9VT6NQ" time="0.061">
+<testsuite name="com.bridgelabz.ParkingLotTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-11-24T15:18:34" hostname="DESKTOP-U9VT6NQ" time="0.109">
   <properties/>
-  <testcase name="givenANullVehicle_WhenUnParked_ShouldThrowException()" classname="com.bridgelabz.ParkingLotTest" time="0.061"/>
-  <system-out><![CDATA[]]></system-out>
+  <testcase name="givenAVehicle_WhenParked_ThenCheckTimeOfParking_ShouldReturnParkingTime()" classname="com.bridgelabz.ParkingLotTest" time="0.109"/>
+  <system-out><![CDATA[20:48:34.239429400
+]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
