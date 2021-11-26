@@ -23,7 +23,7 @@
 <tr>
 <td>
 <div class="infoBox" id="tests">
-<div class="counter">19</div>
+<div class="counter">20</div>
 <p>tests</p>
 </div>
 </td>
@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.591s</div>
+<div class="counter">0.175s</div>
 <p>duration</p>
 </div>
 </td>
@@ -78,98 +78,103 @@
 </tr>
 </thead>
 <tr>
-<td class="success">givenADriver_WhenWantsToFindVehicle_ShouldReturnTrue()</td>
-<td class="success">0.006s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
 <td class="success">givenANullVehicle_WhenUnParked_ShouldThrowException()</td>
-<td class="success">0.006s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">givenAVehicle_WhenAlreadyParked_ShouldThrowException()</td>
-<td class="success">0.010s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">givenAVehicle_WhenParkedForLast30Minutes_ShouldReturnThePosition()</td>
-<td class="success">0.010s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">givenAVehicle_WhenParked_ShouldReturnTrue()</td>
-<td class="success">0.017s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">givenAVehicle_WhenParked_ThenCheckTimeOfParking_ShouldReturnParkingTime()</td>
-<td class="success">0.019s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">givenAVehicle_WhenUnParked_ShouldReturnTrue()</td>
-<td class="success">0.006s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">givenHandicappedPerson_WhenParkedVehicleByAttendantShouldReturnTrue()</td>
-<td class="success">0.008s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">givenPoliceDepartment_WheSearchForHandicapVehicles_ShouldThrowException()</td>
-<td class="success">0.174s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">givenPoliceDepartment_WhenBMWVehicles_ShouldReturnTrue()</td>
-<td class="success">0.013s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">givenPoliceDepartment_WhenSearchForBlueToyotaVehicles_ShouldReturnTrue()</td>
-<td class="success">0.216s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">givenPoliceDepartment_WhenSearchForWhiteVehicles_ShouldReturnTrue()</td>
-<td class="success">0.024s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">givenPoliceDepartment_WhenThereAreNoBlueToyotaVehicles_ShouldThrowException()</td>
-<td class="success">0.005s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">givenPoliceDepartment_WhenThereAreNoWhiteVehicles_ShouldThrowException()</td>
-<td class="success">0.009s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">givenToParkVehicleByAttendant_ShouldReturnTrue()</td>
 <td class="success">0.003s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
-<td class="success">givenVehicle_WhenCheckedVehicleNumber_ShouldPassVehicleNumberPlateValidation()</td>
-<td class="success">0.006s</td>
+<td class="success">givenAVehicle_WhenAlreadyParked_ShouldThrowException()</td>
+<td class="success">0.003s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
-<td class="success">givenVehicles_WhenEvenlyParked_ShouldReturnTrue()</td>
-<td class="success">0.012s</td>
+<td class="success">givenAVehicle_WhenParkedForLast30Minutes_ShouldReturnThePosition()</td>
+<td class="success">0.005s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
-<td class="success">givenWhenParkingLotIsFull_ShouldInformTheOwner()</td>
+<td class="success">givenAVehicle_WhenParked_ShouldReturnTrue()</td>
+<td class="success">0.002s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">givenAVehicle_WhenParked_ThenCheckForPosition_ShouldReturnPosition()</td>
+<td class="success">0.008s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">givenAVehicle_WhenParked_ThenCheckTimeOfParking_ShouldReturnParkingTime()</td>
+<td class="success">0.003s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">givenAVehicle_WhenSearchForBMWVehicle_ShouldLocateProperly()</td>
+<td class="success">0.084s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">givenAVehicle_WhenSearchForBlueToyota_ShouldReturnTheLocation()</td>
 <td class="success">0.007s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
+<td class="success">givenAVehicle_WhenSearchForParkedWhiteColorVehicle_ShouldReturnTheLocation()</td>
+<td class="success">0.002s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">givenAVehicle_WhenThereAreNoBMWVehicles_ShouldThrowException()</td>
+<td class="success">0.004s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">givenAVehicle_WhenThereAreNoBlueToyota_ShouldThrowException()</td>
+<td class="success">0.006s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">givenAVehicle_WhenUnParked_ShouldReturnTrue()</td>
+<td class="success">0.005s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">givenHandicappedPerson_WhenParkedVehicleByAttendantShouldReturnTrue()</td>
+<td class="success">0.006s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">givenPoliceDepartment_WheSearchForHandicapVehicles_ShouldThrowException()</td>
+<td class="success">0.008s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">givenPoliceDepartment_WhenThereAreNoWhiteVehicles_ShouldThrowException()</td>
+<td class="success">0.007s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">givenToParkVehicleByAttendant_ShouldReturnTrue()</td>
+<td class="success">0.002s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">givenVehicle_WhenCheckedVehicleNumber_ShouldPassVehicleNumberPlateValidation()</td>
+<td class="success">0.004s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">givenVehicles_WhenEvenlyParked_ShouldReturnTrue()</td>
+<td class="success">0.003s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">givenWhenParkingLotIsFull_ShouldInformTheOwner()</td>
+<td class="success">0.004s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
 <td class="success">givenWhenParkingLotIsFull_ShouldInformTheSecurity()</td>
-<td class="success">0.040s</td>
+<td class="success">0.009s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -177,7 +182,8 @@
 <div id="tab1" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>23:05:58.400962900
+<pre>0
+19:25:48.652211400
 </pre>
 </span>
 </div>
@@ -189,7 +195,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 7.1</a> at 24-Nov-2021, 11:05:58 PM</p>
+<a href="http://www.gradle.org">Gradle 7.1</a> at 26-Nov-2021, 7:25:48 PM</p>
 </div>
 </div>
 </body>

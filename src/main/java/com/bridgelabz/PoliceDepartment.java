@@ -23,20 +23,10 @@ public class PoliceDepartment {
      * @throws ParkingLotException when there are no white vehicles present in
      * the parking lots.
      */
-    public List getAllWhiteVehicles() throws ParkingLotException{
-        return parkingLotSystem.getWhiteColorVehiclePosition();
+    public int getAllWhiteVehicles() throws ParkingLotException{
+        return parkingLotSystem.getVehiclePositionByColor("White");
     }
 
-    /**
-     * Purpose : This method is to find all the Blue Toyota vehicles that are present in the parking lots.
-     *
-     * @return List of Blue Toyota vehicles.
-     * @throws ParkingLotException when there are no Blue Toyota vehicles present in
-     * the parking lots.
-     */
-    public List getBlueToyotaVehicles() throws ParkingLotException{
-        return parkingLotSystem.getBlueToyotaVehicles();
-    }
 
     /**
      * purpose : This method is to find all the BMW vehicles that are present in the parking lots.
@@ -45,8 +35,8 @@ public class PoliceDepartment {
      * @throws ParkingLotException when there are no BMW vehicles present in
      * the parking lots.
      */
-    public List getAllBMWVehicles() throws ParkingLotException{
-        return parkingLotSystem.getBMWVehicles();
+    public int getAllBMWVehicles() throws ParkingLotException{
+        return parkingLotSystem.getVehiclePositionByName("BMW");
     }
 
     /**

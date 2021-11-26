@@ -1,6 +1,5 @@
 package com.bridgelabz;
 
-
 /**
  * Purpose : Driver can find the parked vehicle in the ParkingLot
  *
@@ -17,7 +16,7 @@ public class Driver {
      * @param vehicle defines the searched vehicle
      * @return object - the resultant vehicle after searching.
      */
-    public Object searchVehicle(Vehicle vehicle){
+    public int searchVehicle(Vehicle vehicle){
         return parkingLotSystem.findVehicle(vehicle);
     }
 }
